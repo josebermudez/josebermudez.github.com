@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
-  <link href="http://josebermudez.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: phpUnit | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
+  <link href="http://josebermudez.github.io/blog/categories/phpunit/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
   <updated>2013-06-26T11:18:02-05:00</updated>
   <id>http://josebermudez.github.io/</id>
@@ -57,21 +57,6 @@ y en  pr&oacute;ximos post vamos a usar estas herramientas para construir un eje
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mi primer post, bienvenida]]></title>
-    <link href="http://josebermudez.github.io/blog/2013/06/23/mi-blog-personal-hola/"/>
-    <updated>2013-06-23T15:48:00-05:00</updated>
-    <id>http://josebermudez.github.io/blog/2013/06/23/mi-blog-personal-hola</id>
-    <content type="html"><![CDATA[<p>Hola, tome la decisi&oacute;n de crear un blog para compartir con la comunidad de
-desarrolladores temas que nos permitan aprender nuevas t&eacute;cnicas, obtener
-nuevas habilidades y competencias para nuestro que hacer diario: hacer c&oacute;digo
-productivo de excelente calidad.</p>
-
-<p>Espero que sea de utilidad para tod@s.
-Bienvenidos</p>
 ]]></content>
   </entry>
   
