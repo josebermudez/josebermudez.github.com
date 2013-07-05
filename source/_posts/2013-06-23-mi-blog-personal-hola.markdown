@@ -8,7 +8,7 @@ author: Jos&eacute; Joaqu&iacute;n Berm&uacute;dez
 ---
 
 Hola, tome la decisi&oacute;n de crear un blog para compartir con la comunidad de 
-desarrolladores temas que nos permitan aprender nuevas t&eacute;cnicas u obtener 
+desarrolladores temas que nos permitan aprender nuevas t&eacute;cnicas, obtener 
 nuevas habilidades y competencias para nuestro que hacer diario: hacer c&oacute;digo 
 productivo de excelente calidad. 
 
