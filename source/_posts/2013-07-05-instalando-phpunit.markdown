@@ -5,9 +5,9 @@ date: 2013-07-05 08:54
 comments: true
 categories: [php, phpUnit, TDD]
 ---
-Vamos a instalar la herramienta que nos permitir&aacute; realizar nuestras pruebas unitarias.
-Para esto debemos tener previamente en nuestra maquina el entorno de desarrollo PEAR, espero que en pr&oacute;ximos post escribir un poco de 
-como instalar y para que no sirve ese framework.
+<p>Vamos a instalar la herramienta que nos permitir&aacute; realizar nuestras pruebas unitarias.</p>
+<p>Para esto debemos tener previamente en nuestra maquina el entorno de desarrollo PEAR, espero que en pr&oacute;ximos post escribir un poco de 
+como instalar y para que no sirve ese framework.</p>
 <!-- more -->
 Para instalar phpUnit debemos ejecutar la siguiente l&iacute;nea de comando:
 
