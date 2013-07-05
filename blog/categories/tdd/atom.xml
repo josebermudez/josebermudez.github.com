@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-07-05T11:44:01-05:00</updated>
+  <updated>2013-07-05T11:52:25-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -57,7 +57,7 @@ como programadores se nos haga mas f&aacute;cil.</p>
     <link href="http://josebermudez.github.io/blog/2013/06/26/pruebas-unitarias-en-php/"/>
     <updated>2013-06-26T09:38:00-05:00</updated>
     <id>http://josebermudez.github.io/blog/2013/06/26/pruebas-unitarias-en-php</id>
-    <content type="html"><![CDATA[<p>Bueno, el pasado 26 de junio particip&eacute; en el <a href="http://agilescolombia.org/2013/05/16/agile-open-medellin-junio-22-de-2013/" title="Agile Open Medell&iacute;n">Agile Open Medell&iacute;n</a> y entre los asistentes se plante&oacute;
+    <content type="html"><![CDATA[<p>Bueno, el pasado 26 de junio particip&eacute; en el <a href="http://agilescolombia.org/2013/05/16/agile-open-medellin-junio-22-de-2013/" title="Agile Open Medell&iacute;n" target="_blank">Agile Open Medell&iacute;n</a> y entre los asistentes se plante&oacute;
 un dojo sobre <b>&ldquo;creaci&oacute;n de pruebas unitaras para Php&rdquo;</b>, all&iacute; not&eacute; que a pesar de que existen
 herramientas para realizar las pruebas unitarias en este lenguage, no son tan conocidas como para Java.</p>
 
@@ -72,8 +72,8 @@ y en  pr&oacute;ximos post vamos a usar estas herramientas para construir un eje
 <ul>
 <li>Servidor Apache y php:
 <ol>
-        <li><a href="http://www.uwamp.com/en/" title="Uwamp">Uwamp</a> ( mi preferido )</li>
-        <li><a href="http://www.apachefriends.org/es/xampp.html" title="xampp">xampp</a></li>
+        <li><a href="http://www.uwamp.com/en/" title="Uwamp" target="_blank">Uwamp</a> ( mi preferido )</li>
+        <li><a href="http://www.apachefriends.org/es/xampp.html" title="xampp" target="_blank">xampp</a></li>
     </ol>
 </li>
 </ul>
@@ -82,16 +82,16 @@ y en  pr&oacute;ximos post vamos a usar estas herramientas para construir un eje
 <p>Y debemos instalar, si aun no lo tenemos:</p>
 
 <ul>
-<li>PEAR <a href="http://pear.php.net/" title="PEAR">P&aacute;gina oficial</a> </li>
-<li>PHPUnit <a href="http://phpunit.de/manual/current/en/index.html" title="PHPUnit">P&aacute;gina oficial</a></li>
+<li>PEAR <a href="http://pear.php.net/" title="PEAR" target="_blank">P&aacute;gina oficial</a> </li>
+<li>PHPUnit <a href="http://phpunit.de/manual/current/en/index.html" title="PHPUnit" target="_blank">P&aacute;gina oficial</a></li>
 </ul>
 
 
 <p>Y un editor que nos permita escribir y realizar nuestra pruebas:</p>
 
 <ul>
-<li>Netbeans <a href="https://netbeans.org/" title="Netbeans">P&aacute;gina oficial</a> </li>
-<li>Eclipse <a href="http://www.eclipse.org/" title="Eclipse">P&aacute;gina oficial</a></li>
+<li>Netbeans <a href="https://netbeans.org/" title="Netbeans" target="_blank">P&aacute;gina oficial</a> </li>
+<li>Eclipse <a href="http://www.eclipse.org/" title="Eclipse" target="_blank">P&aacute;gina oficial</a></li>
 </ul>
 
 
