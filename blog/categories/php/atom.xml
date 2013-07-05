@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-06-26T11:18:02-05:00</updated>
+  <updated>2013-07-05T11:30:40-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Instalando PhpUnit]]></title>
+    <link href="http://josebermudez.github.io/blog/2013/07/05/instalando-phpunit/"/>
+    <updated>2013-07-05T08:54:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2013/07/05/instalando-phpunit</id>
+    <content type="html"><![CDATA[<p>Vamos a instalar la herramienta que nos permitir&aacute; realizar nuestras pruebas unitarias para esto debemos
+tener previamente el entorno de desarrollo PEAR que en pr&oacute;ximos post estaremos hablando de ella.</p>
+
+<!-- more -->
+
+
+<p>Para instalar phpUnit debemos ejecutar la siguiente l&iacute;nea de comando:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando PEAR &ndash; Windows </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pear install -a pear.phpunit.de/PHPUnit ( Windows )</span></code></pre></td></tr></table></div></figure></notextile></div>
+Se debe ver algo como esto:</p>
+
+<p><img src="/images/cmd-instalar-phpunit.png" width="350" height="350" title="&lsquo;CMD-windows&rsquo; &lsquo;CMD-windows&rsquo;" ></p>
+
+<p>Una vez terminado el proceso ejecutamos el siguiente comando:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando PEAR &ndash; Windows </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pear clear-cache</span></code></pre></td></tr></table></div></figure></notextile></div>
+Y por &uacute;ltimo verificamos la versi&oacute;n de nuestro phpUnit ejecutando el siguiente comando:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando PEAR -Windows </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>phpunit &mdash;version</span></code></pre></td></tr></table></div></figure></notextile></div>
+Listo hemos terminado, ahora solo nos basta empezar a escribir nuestras pruebas unitarias para que la vida
+como programadores se nos haga mas f&aacute;cil.</p>
+
+<p>Hasta pronto !!!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Pruebas unitarias en PHP]]></title>
