@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-07-05T11:35:20-05:00</updated>
+  <updated>2013-07-05T11:37:52-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -18,9 +18,12 @@
     <link href="http://josebermudez.github.io/blog/2013/07/05/instalando-phpunit/"/>
     <updated>2013-07-05T08:54:00-05:00</updated>
     <id>http://josebermudez.github.io/blog/2013/07/05/instalando-phpunit</id>
-    <content type="html"><![CDATA[<p>Vamos a instalar la herramienta que nos permitir&aacute; realizar nuestras pruebas unitarias.
-Para esto debemos tener previamente en nuestra maquina el entorno de desarrollo PEAR, espero que en pr&oacute;ximos post escribir un poco de
+    <content type="html"><![CDATA[<p>Vamos a instalar la herramienta que nos permitir&aacute; realizar nuestras pruebas unitarias.</p>
+
+
+<p>Para esto debemos tener previamente en nuestra maquina el entorno de desarrollo PEAR, espero que en pr&oacute;ximos post escribir un poco de 
 como instalar y para que no sirve ese framework.</p>
+
 
 <!-- more -->
 
