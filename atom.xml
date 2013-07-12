@@ -4,7 +4,7 @@
   <title><![CDATA[El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-07-12T13:41:37-05:00</updated>
+  <updated>2013-07-12T13:45:05-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -56,7 +56,7 @@ realizar las operaciones b&aacute;sicas de la aritm&eacute;tica &rdquo;.<br/>
 <p>
 Normalmente nuestra respuesta ser&iacute;a: realizar el diagrama de clases, o empezar  a escribir c&oacute;digo, 
 aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
-<strong> &iexcl; Escribir el test ! manos a la obra</strong>
+<strong> &iexcl; Escribir el test !</strong>
 </p>
 
 
