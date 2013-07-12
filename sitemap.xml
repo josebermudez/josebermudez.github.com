@@ -2,23 +2,27 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://josebermudez.github.io/blog/2013/06/23/mi-blog-personal-hola/</loc>
-        <lastmod>2013-06-24T15:18:05-05:00</lastmod>
+        <lastmod>2013-07-12T11:22:06-05:00</lastmod>
     </url>
     <url>
         <loc>http://josebermudez.github.io/blog/2013/06/26/pruebas-unitarias-en-php/</loc>
-        <lastmod>2013-07-05T11:52:07-05:00</lastmod>
+        <lastmod>2013-07-12T11:22:06-05:00</lastmod>
     </url>
     <url>
         <loc>http://josebermudez.github.io/blog/2013/07/05/instalando-phpunit/</loc>
-        <lastmod>2013-07-05T11:43:52-05:00</lastmod>
+        <lastmod>2013-07-12T11:22:06-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico/</loc>
+        <lastmod>2013-07-12T13:41:15-05:00</lastmod>
     </url>
     <url>
         <loc>http://josebermudez.github.io/blog/archives/</loc>
-        <lastmod>2013-07-05T11:52:07-05:00</lastmod>
+        <lastmod>2013-07-12T13:41:15-05:00</lastmod>
     </url>
     <url>
         <loc>http://josebermudez.github.io/</loc>
-        <lastmod>2013-07-05T11:52:07-05:00</lastmod>
+        <lastmod>2013-07-12T13:41:15-05:00</lastmod>
     </url>
     <url>
         <loc>http://josebermudez.github.io/robots.txt</loc>

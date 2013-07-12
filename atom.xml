@@ -4,7 +4,7 @@
   <title><![CDATA[El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-07-10T16:59:46-05:00</updated>
+  <updated>2013-07-12T13:41:37-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico]]></title>
+    <link href="http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico/"/>
+    <updated>2013-07-12T07:21:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico</id>
+    <content type="html"><![CDATA[<p>
+Para entender mejor el tema de las pruebas unitarias en PHP vamos a crear un ejemplo con el 
+cual demostaremos la utilidad y los beneficios que trae para el desarrollo realizar una pruebas unitarias,
+ademas como mediante TDD podemos ir construyendo paso a paso nuestro c&oacute;digo productivo y lo mejor,
+con menos posibilidades de fallo.</p>
+
+
+<!-- more -->
+
+
+<p>Ahora si manos a la obra, vamos a suponer que en nuestra sprint back log nos entrega el siguiente requisito (historia de usuario):
+</p>
+
+
+<p>
+<strong>Como</strong> visitante del portal<br/> 
+</p>
+
+
+<p>
+<strong>Yo quiero</strong> realizar las operaciones b&aacute;sicas de la aritm&eacute;tica<br/> 
+</p>
+
+
+<p>
+<strong>De manera que</strong> pueda sumar, dividir, restar o multiplicar dos n&uacute;meros.<br/> 
+</p>
+
+
+<p>Ya tenemos nuestro requisto:
+&ldquo; debemos realizar un modulo que esta en un portal web que nos permita
+realizar las operaciones b&aacute;sicas de la aritm&eacute;tica &rdquo;.<br/>
+<span> cual seria nuestro primer paso?</span>
+</p></p>
+
+<p>
+Normalmente nuestra respuesta ser&iacute;a: realizar el diagrama de clases, o empezar  a escribir c&oacute;digo, 
+aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
+<strong> &iexcl; Escribir el test ! manos a la obra</strong>
+</p>
+
+
+<p>Analizemos que necesitamos:</p>
+
+<ul>
+<li>Una clase que contenga los m&eacute;todos para las operaciones b&aacute;sicas.</li>
+<li>Un m&eacute;todo para sumar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la suma de los 2 par&aacute;metros de entrada.</li>
+<li>Un m&eacute;todo para restar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la resta de los 2 par&aacute;metros de entrada.</li>
+<li>Un m&eacute;todo para dividir que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el cociente de la divisi&oacute;n de los 2 par&aacute;metros de entrada.</li>
+<li>Un m&eacute;todo para multiplicar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el resultado de la multiplicacipon de 2 n&uacute;meros.</li>
+</ul>
+
+
+<p>
+Ya con una idea inicial de que acciones debe tener nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
+
+<figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
+</span><span class='line'>    
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+La clase de prueba extiende de una clase llamada PHPUnit_Framework_TestCase y es la que nos indica que estamos programando un test y nos permite usar todas las caracter&iacute;sticas de PhpUnit.
+</p>
+
+
+<p>
+
+<figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
+</span><span class='line'>     /**
+</span><span class='line'>     * Clase que contiene los m&eacute;todos b&aacute;sicos de operaci&oacute;n
+</span><span class='line'>     * 
+</span><span class='line'>     * @var ArithmeticBasicOperations 
+</span><span class='line'>     */
+</span><span class='line'>    protected $ArithmeticBasicOperations;
+</span><span class='line'>     /**
+</span><span class='line'>     * M&eacute;todo que se ejecuta por cada test
+</span><span class='line'>     * 
+</span><span class='line'>     * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
+</span><span class='line'>     * que se le va a realizar las pruebas asi como los set de datos a usar.
+</span><span class='line'>     * 
+</span><span class='line'>     * @author  Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;jose.bermudez.correa@gmail.com>
+</span><span class='line'>     * @version 1.0
+</span><span class='line'>     * 
+</span><span class='line'>     * @return void;
+</span><span class='line'>     * 
+</span><span class='line'>     */
+</span><span class='line'>    protected function setUp()
+</span><span class='line'>    {
+</span><span class='line'>        //Instanciamos el objeto que vamos a probar
+</span><span class='line'>        $this->ArithmeticBasicOperations = new ArithmeticBasicOperations();
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+Todo script de test debe sobreescribir el m&eacute;todo setUp que se encuentra en la clase <blockquote>PHPUnit_Framework_TestCase</blockquote>
+</p>
+
+
+<p>Para el pr&oacute;ximo post vamos a empezar a codificar nuestro test para probar la funcionalidad de sumar</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Instalando PhpUnit]]></title>

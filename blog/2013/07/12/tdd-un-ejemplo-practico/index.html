@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PhpUnit + TDD un ejemplo pr&aacute;ctico - El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</title>
+  <meta name="author" content="Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa">
+
+  
+  <meta name="description" content="Para entender mejor el tema de las pruebas unitarias en PHP vamos a crear un ejemplo con el cual demostaremos la utilidad y los beneficios que trae &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">JJ</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</a></h1>
+  
+    <h2>Metodolog&iacute;as &aacute;giles, php, arquitectura, integraci&oacute;n continua, javascript y otras cosas mas...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:josebermudez.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">PhpUnit + TDD Un Ejemplo Pr&aacute;ctico</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-12T07:21:00-05:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>
+Para entender mejor el tema de las pruebas unitarias en PHP vamos a crear un ejemplo con el 
+cual demostaremos la utilidad y los beneficios que trae para el desarrollo realizar una pruebas unitarias,
+ademas como mediante TDD podemos ir construyendo paso a paso nuestro c&oacute;digo productivo y lo mejor,
+con menos posibilidades de fallo.</p>
+
+
+<!-- more -->
+
+
+<p>Ahora si manos a la obra, vamos a suponer que en nuestra sprint back log nos entrega el siguiente requisito (historia de usuario):
+</p>
+
+
+<p>
+<strong>Como</strong> visitante del portal<br/> 
+</p>
+
+
+<p>
+<strong>Yo quiero</strong> realizar las operaciones b&aacute;sicas de la aritm&eacute;tica<br/> 
+</p>
+
+
+<p>
+<strong>De manera que</strong> pueda sumar, dividir, restar o multiplicar dos n&uacute;meros.<br/> 
+</p>
+
+
+<p>Ya tenemos nuestro requisto:
+&ldquo; debemos realizar un modulo que esta en un portal web que nos permita
+realizar las operaciones b&aacute;sicas de la aritm&eacute;tica &rdquo;.<br/>
+<span> cual seria nuestro primer paso?</span>
+</p></p>
+
+<p>
+Normalmente nuestra respuesta ser&iacute;a: realizar el diagrama de clases, o empezar  a escribir c&oacute;digo, 
+aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
+<strong> &iexcl; Escribir el test ! manos a la obra</strong>
+</p>
+
+
+<p>Analizemos que necesitamos:</p>
+
+<ul>
+<li>Una clase que contenga los m&eacute;todos para las operaciones b&aacute;sicas.</li>
+<li>Un m&eacute;todo para sumar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la suma de los 2 par&aacute;metros de entrada.</li>
+<li>Un m&eacute;todo para restar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la resta de los 2 par&aacute;metros de entrada.</li>
+<li>Un m&eacute;todo para dividir que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el cociente de la divisi&oacute;n de los 2 par&aacute;metros de entrada.</li>
+<li>Un m&eacute;todo para multiplicar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el resultado de la multiplicacipon de 2 n&uacute;meros.</li>
+</ul>
+
+
+<p>
+Ya con una idea inicial de que acciones debe tener nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
+
+<figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
+</span><span class='line'>    
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+La clase de prueba extiende de una clase llamada PHPUnit_Framework_TestCase y es la que nos indica que estamos programando un test y nos permite usar todas las caracter&iacute;sticas de PhpUnit.
+</p>
+
+
+<p>
+
+<figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
+</span><span class='line'>     /**
+</span><span class='line'>     * Clase que contiene los m&eacute;todos b&aacute;sicos de operaci&oacute;n
+</span><span class='line'>     * 
+</span><span class='line'>     * @var ArithmeticBasicOperations 
+</span><span class='line'>     */
+</span><span class='line'>    protected $ArithmeticBasicOperations;
+</span><span class='line'>     /**
+</span><span class='line'>     * M&eacute;todo que se ejecuta por cada test
+</span><span class='line'>     * 
+</span><span class='line'>     * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
+</span><span class='line'>     * que se le va a realizar las pruebas asi como los set de datos a usar.
+</span><span class='line'>     * 
+</span><span class='line'>     * @author  Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;jose.bermudez.correa@gmail.com>
+</span><span class='line'>     * @version 1.0
+</span><span class='line'>     * 
+</span><span class='line'>     * @return void;
+</span><span class='line'>     * 
+</span><span class='line'>     */
+</span><span class='line'>    protected function setUp()
+</span><span class='line'>    {
+</span><span class='line'>        //Instanciamos el objeto que vamos a probar
+</span><span class='line'>        $this->ArithmeticBasicOperations = new ArithmeticBasicOperations();
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+Todo script de test debe sobreescribir el m&eacute;todo setUp que se encuentra en la clase <blockquote>PHPUnit_Framework_TestCase</blockquote>
+</p>
+
+
+<p>Para el pr&oacute;ximo post vamos a empezar a codificar nuestro test para probar la funcionalidad de sumar</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-12T07:21:00-05:00" pubdate data-updated="true">Jul 12<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/phpunit/'>phpUnit</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico/" data-via="" data-counturl="http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/07/05/instalando-phpunit/" title="Previous Post: Instalando PhpUnit">&laquo; Instalando PhpUnit</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="first odd" id="about-me">
+<p>Actualmente estoy en un proyecto desarrollado con el framework Yii y estamos usando phpUnit para pruebas unitarias.</p>
+</section>
+<section class="even" id="LinkedIn-jose-joaquin-bermudez">
+  <h1>LinkedIn</h1>
+  <a style="text-decoration:none;" href="http://co.linkedin.com/in/josejoaquinbermudezcorrea/"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img width="20" border="0" height="15" style="vertical-align:middle; border-width: 0px; box-shadow: none" alt="Ver el perfil de LinkedIn de  José Joaquín Bermúdez" src="http://www.linkedin.com/img/webpromo/btn_in_20x15.png">Ver mi perfil</span></a>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/12/tdd-un-ejemplo-practico/">PhpUnit + TDD un ejemplo pr&aacute;ctico</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/05/instalando-phpunit/">Instalando PhpUnit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/26/pruebas-unitarias-en-php/">Pruebas unitarias en PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/23/mi-blog-personal-hola/">Mi primer post, bienvenida</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
