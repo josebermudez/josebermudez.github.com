@@ -30,7 +30,7 @@ realizar las operaciones b&aacute;sicas de la aritm&eacute;tica ".<br/>
 <p>
 Normalmente nuestra respuesta ser&iacute;a: realizar el diagrama de clases, o empezar  a escribir c&oacute;digo, 
 aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
-<strong> &iexcl; Escribir el test ! manos a la obra</strong>
+<strong> &iexcl; Escribir el test !</strong>
 </p>
 Analizemos que necesitamos:
 <ul>
