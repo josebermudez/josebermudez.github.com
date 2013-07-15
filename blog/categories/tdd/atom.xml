@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-07-15T13:05:20-05:00</updated>
+  <updated>2013-07-15T13:40:55-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -58,7 +58,7 @@ aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
 </p>
 
 
-<p>Analizemos que necesitamos:</p>
+<p>De acuerdo a la historia de usuario vamos a analizar que necesitamos:</p>
 
 <ul>
 <li>Una clase que contenga los m&eacute;todos para las operaciones b&aacute;sicas.</li>
@@ -70,7 +70,7 @@ aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
 
 
 <p><p>
-Ya con una idea inicial de que funciones debe hacer nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
+Ya con una idea inicial de que funciones debe tener nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
