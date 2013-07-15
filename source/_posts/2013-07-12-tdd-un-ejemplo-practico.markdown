@@ -6,12 +6,10 @@ comments: true
 categories: [php, phpUnit, TDD]
 ---
 <p>
-Para entender mejor el tema de las pruebas unitarias en PHP vamos a crear un ejemplo con el 
-cual demostaremos la utilidad y los beneficios que trae para el desarrollo realizar una pruebas unitarias,
-ademas como mediante TDD podemos ir construyendo paso a paso nuestro c&oacute;digo productivo y lo mejor,
-con menos posibilidades de fallo.</p>
+Para entender mejor el tema de las pruebas unitarias en PHP vamos a crear un ejemplo donde 
+demostaremos la utilidad y los beneficios que las pruebas tempranas trae para el desarrollo de un producto de software, ademas descrubriremos mediante TDD como podemos ir construyendo paso a paso nuestro c&oacute;digo productivo y lo mejor, con menos posibilidades de fallo.</p>
 <!-- more -->
-<p>Ahora si manos a la obra, vamos a suponer que en nuestra sprint back log nos entrega el siguiente requisito (historia de usuario):
+<p>Ahora si manos a la obra, vamos a suponer que nuestro sprint back log nos entrega el siguiente requisito (historia de usuario):
 </p>
 <p>
 <strong>Como</strong> visitante del portal<br/> 
@@ -30,7 +28,7 @@ realizar las operaciones b&aacute;sicas de la aritm&eacute;tica ".<br/>
 <p>
 Normalmente nuestra respuesta ser&iacute;a: realizar el diagrama de clases, o empezar  a escribir c&oacute;digo, 
 aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
-<strong> &iexcl; Escribir el test !</strong>
+<strong> &iexcl; Escribir la prueba !</strong>
 </p>
 Analizemos que necesitamos:
 <ul>
@@ -41,7 +39,7 @@ Analizemos que necesitamos:
 <li>Un m&eacute;todo para multiplicar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el resultado de la multiplicacipon de 2 n&uacute;meros.</li>
 </ul>
 <p>
-Ya con una idea inicial de que acciones debe tener nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
+Ya con una idea inicial de que funciones debe hacer nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
 {% codeblock Test phpUnit usando Php lang: PHP%}
 <?php
 class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
