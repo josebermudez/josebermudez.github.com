@@ -30,7 +30,7 @@ Normalmente nuestra respuesta ser&iacute;a: realizar el diagrama de clases, o em
 aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
 <strong> &iexcl; Escribir la prueba !</strong>
 </p>
-Analizemos que necesitamos:
+De acuerdo a la historia de usuario vamos a analizar que necesitamos:
 <ul>
 <li>Una clase que contenga los m&eacute;todos para las operaciones b&aacute;sicas.</li>
 <li>Un m&eacute;todo para sumar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la suma de los 2 par&aacute;metros de entrada.</li>
@@ -39,7 +39,7 @@ Analizemos que necesitamos:
 <li>Un m&eacute;todo para multiplicar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el resultado de la multiplicacipon de 2 n&uacute;meros.</li>
 </ul>
 <p>
-Ya con una idea inicial de que funciones debe hacer nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
+Ya con una idea inicial de que funciones debe tener nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
 {% codeblock Test phpUnit usando Php lang: PHP%}
 <?php
 class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
