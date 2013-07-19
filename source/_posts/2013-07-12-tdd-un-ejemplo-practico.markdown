@@ -56,7 +56,7 @@ class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
      * 
      * @var ArithmeticBasicOperations 
      */
-    protected $ArithmeticBasicOperations;
+    protected $arithmeticBasicOperations;
      /**
      * M&eacute;todo que se ejecuta por cada test
      * 
@@ -72,7 +72,7 @@ class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
     protected function setUp()
     {
         //Instanciamos el objeto que vamos a probar
-        $this->ArithmeticBasicOperations = new ArithmeticBasicOperations();
+        $this->arithmeticBasicOperations = new ArithmeticBasicOperations();
     }
 }
 {% endcodeblock %}
