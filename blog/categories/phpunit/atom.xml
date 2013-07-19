@@ -4,7 +4,7 @@
   <title><![CDATA[Category: phpUnit | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/blog/categories/phpunit/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-07-19T11:26:37-05:00</updated>
+  <updated>2013-07-19T11:32:15-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -37,7 +37,7 @@ De acuerdo al an&aacute;lisis que realizamos en el post anterior para la funci&o
 
 
 <p><p>
-Escibamos entonces el test, retomando lo que habiamos hecho en el post anterior:
+Escribamos entonces el test, retomando lo que habiamos hecho en el post anterior:
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
