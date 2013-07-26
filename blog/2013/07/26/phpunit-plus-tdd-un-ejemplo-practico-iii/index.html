@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>PhpUnit + TDD Un Ejemplo Pr&aacute;ctico II - El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</title>
+  <title>PhpUnit + TDD un ejemplo pr&aacute;ctico III - El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</title>
   <meta name="author" content="Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa">
 
   
-  <meta name="description" content="Continuando con nuestro ejemplo, vamos a crear el test para la funcion sumar, de esta forma vamos profundizando en la forma de usar phpUnit. Creando &hellip;">
+  <meta name="description" content="En esta tercera entrega continuaremos con los test para el requisito de las operaciones matem&aacute;ticas.
+Vamos a agregar m&aacute;s casos de &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://josebermudez.github.io/blog/2013/07/19/phpunit-plus-tdd-un-ejemplo-practico-ii/">
+  <link rel="canonical" href="http://josebermudez.github.io/blog/2013/07/26/phpunit-plus-tdd-un-ejemplo-practico-iii/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,7 +77,7 @@
   <header>
     
       
-        <h1 class="entry-title">PhpUnit + TDD Un Ejemplo Pr&aacute;ctico II</h1>
+        <h1 class="entry-title">PhpUnit + TDD Un Ejemplo Pr&aacute;ctico III</h1>
       
     
     
@@ -93,33 +94,53 @@
   
 
 
-<time datetime="2013-07-19T08:05:00-05:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2013-07-26T07:40:00-05:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Continuando con nuestro ejemplo, vamos a crear el test para la funcion sumar, de esta forma vamos 
-profundizando en la forma de usar phpUnit.</p>
+<div class="entry-content"><p>
+En esta tercera entrega continuaremos con los test para el requisito de las operaciones matem&aacute;ticas.
+Vamos a agregar m&aacute;s casos de prueba:
+<ul>
+<li>
+    Los par&aacute;metros de entrada son un n&uacute;mero entero y un n&uacute;mero decimal.
+</li>
+<li>
+    Los par&aacute;metros de entrada son dos n&uacute;meros decimales.
+</li>
+<li>
+    Los par&aacute;metros de entrada son 1 n&uacute;mero entero negativo y un n&uacute;mero entero positivo.
+</li>
+<li>
+    Los par&aacute;metros de entrada son 2 n&uacute;mero enteros negativos.
+</li>
+<li>
+    Los par&aacute;metros de entrada son 1 letra del alfabeto y 1 n&uacute;mero entero.
+</li>
+<li>
+    Los par&aacute;metros de entrada son Null y 1 n&uacute;mero entero.
+</li>
+<li>
+   Los par&aacute;metros de entrada son 1 boolean falso y 1 n&uacute;mero entero.
+</li>
+<li>
+   Los par&aacute;metros de entrada son 1 boolean true y 1 n&uacute;mero entero.
+</li>
+</ul>
+
+</p>
 
 
 <!-- more -->
 
 
-<h1>Creando nuestro test para la funcionalidad de sumar.</h1>
+<h2>Agregamos los nuevos casos al test</h2>
 
 
-<p>
-De acuerdo al an&aacute;lisis que realizamos en el post anterior para la funci&oacute;n de suma lo que queremos es:
-<ul>
-<li>Un m&eacute;todo para sumar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la suma de los 2 par&aacute;metros de entrada.</li>
-</ul>
-</p>
 
-
-<p>
-Escribamos entonces el test, retomando lo que habiamos hecho en el post anterior:
 
 <figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -178,6 +199,23 @@ Escribamos entonces el test, retomando lo que habiamos hecho en el post anterior
 <span class='line-number'>54</span>
 <span class='line-number'>55</span>
 <span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
 </span><span class='line'>include_once dirname(__FILE__) . '/ArithmeticBasicOperations.php';
 </span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
@@ -230,76 +268,43 @@ Escribamos entonces el test, retomando lo que habiamos hecho en el post anterior
 </span><span class='line'>    {
 </span><span class='line'>        return array(
 </span><span class='line'>                //primer set de datos para el test
-</span><span class='line'>                array(1,2,3)
+</span><span class='line'>                array(1,2,3),
+</span><span class='line'>                //Los par&aacute;metros de entrada son un número entero y un n&uacute;mero decimal
+</span><span class='line'>                array(1,2.5,3.5),
+</span><span class='line'>                //Los par&aacute;metros de entrada son dos n&uacute;meros decimales
+</span><span class='line'>                array(1.25,2.50,3.75),
+</span><span class='line'>                //Los parámetros de entrada son 1 n&uacute;mero entero negativo 
+</span><span class='line'>                //y un n&uacute;mero entero positivo
+</span><span class='line'>                array(-5,17,12),
+</span><span class='line'>               //Los par&aacute;metros de entrada son 2 n&uacute;mero enteros negativos
+</span><span class='line'>                array(-5,-16,-21),   
+</span><span class='line'>                // Los par&aacute;metros de entrada son 1 letra del alfabeto y 1 n&uacute;mero entero
+</span><span class='line'>                array("a",25,0),
+</span><span class='line'>                // Los par&aacute;metros de entrada son Null y 1 n&uacute;mero entero
+</span><span class='line'>                array(null,36,0),
+</span><span class='line'>                // Los par&aacute;metros de entrada son 1 boolean falso y 1 n&uacute;mero entero
+</span><span class='line'>                array(false,21,0),
+</span><span class='line'>                // Los par&aacute;metros de entrada son 1 boolean true y 1 n&uacute;mero entero
+</span><span class='line'>                array(true,21,0),                            
 </span><span class='line'>        );
 </span><span class='line'>    }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
-Analizemos el c&oacute;digo:
-<ul>
-<li>El comentario <i>@dataProvider</i> nos indica que el test va a usar una fuente de datos como entrada y que la funci&oacute;n que 
-retorna esa fuente se llama: dataProviderAdd, podemos usar cualquier nombre para la funci&oacute;n pero acostumbro anteponer la palabra <strong>dataProvider</strong> para identificarla facilmente.</li>
-<li>El nombre de un test en PhpUnit debe iniciar con la palabra test.</li>
-<li>Los par&aacute;metros de entrada del test estan dados en este caso por el dataProvider, si miramos lo que retorna la funci&oacute;n dataProviderAdd, vemos que el array interno tiene 3 posiciones lo cual indica que el test debe recibir 3 par&aacute;metros.</li>
-<li>Los test de PhpUnit normalmente usan los assert para validar la prueba, en este caso estamos validando que el valor de la variable $result es igual a lo que nos retorna la funci&oacute;n add de la clase ArithmeticBasicOperations, una lista completa de los assert con los que podemos jugar, la pueden ver aqu&iacute;: <a href="http://phpunit.de/manual/current/en/writing-tests-for-phpunit.html#writing-tests-for-phpunit.assertions" target="_blank">lista de asserts.</a> </li>
-</ul>
-<h2>Como ejecutar el test</h2>
-Usando la consola de comandos podemos ejecutar un script de prueba, debemos ir hasta la ruta donde
-tenemos el test y ejecutar en la consola ( windows ):
 
-<figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>phpunit ArithmeticBasicOperationsTest.php</span></code></pre></td></tr></table></div></figure>
 
-<img src="/images/ejecutando_test_phpUnit.png" width="671" height="471" title="ejecutando test phpUnit" alt="ejecutando test phpUnit">
-El test ha fallado, este el primer paso cuando estamos desarrollando orientado a las pruebas: <strong>nuestro primer test debe fallar</strong>, en nuestro caso ha fallado por que la clase <blockquote>ArithmeticBasicOperations.php</blockquote> no existe.
+
+<p> Si ejecutamos el test con nuestros nuevos casos de prueba, hay set de datos de entrada
+que producen fallos en el test, por ejemplo el caso 9 retorna 22 y estamos esperando que retornara 21, con esta prueba se ha detectado que un booleano en una suma se comporta como un 0 si el valor es false y como un 1 si el valor es true, entonces que debemos hacer ?<br/> <strong>modificar nuestro c&oacute;digo para hacer pasar el nuevo caso de prueba</strong>. 
+<img src="/images/casos_prueba_fallidos.png" width="676" height="318" title="ejecutando test phpUnit" alt="ejecutando test phpUnit">
 </p>
 
 
-<h2>Generando la clase ArithmeticBasicOperations.php</h2>
+<p>El c&oacute;digo productivo queda de la siguiente forma:</p>
 
 
-<p>Para generar la clase que contiene los m&eacute;todos de las operaciones matem&aacute;ticas podemos usar el comando de phpUnit:<br/>
-<blockquote>
-phpunit-skelgen &#8211;class ArithmeticBasicOperationsTest
-</blockquote>
-<img src="/images/creando_clase_desde_el_test.png" width="669" height="103" title="creando clase desde el test" alt="creando clase desde el test">
 
-<figure class='code'><figcaption><span>Clase generada desde el test lang: PHP</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>/**
-</span><span class='line'> * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
-</span><span class='line'> */
-</span><span class='line'>class ArithmeticBasicOperations
-</span><span class='line'>{
-</span><span class='line'>    /**
-</span><span class='line'>     * @todo Implement add().
-</span><span class='line'>     */
-</span><span class='line'>    public function add()
-</span><span class='line'>    {
-</span><span class='line'>        // Remove the following line when you implement this method.
-</span><span class='line'>        throw new RuntimeException('Not yet implemented.');
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
-Modificamos la clase para agregar los par&aacute;metros y las l&iacute;neas de c&oacute;digo necesarias para hacer pasar el test.
-
-<figure class='code'><figcaption><span>Clase generada desde el test lang: PHP</span></figcaption>
+<figure class='code'><figcaption><span>Funci&oacute;n aritm&eacute;tica usando Php lang: PHP</span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -319,34 +324,139 @@ Modificamos la clase para agregar los par&aacute;metros y las l&iacute;neas de c
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>
 </span><span class='line'>/**
-</span><span class='line'> * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
+</span><span class='line'> *  ArithmeticBasicOperations.php
+</span><span class='line'> *
+</span><span class='line'> * PHP Version 5.3.0
+</span><span class='line'> * 
+</span><span class='line'> * @category  Class 
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;jose.bermudez.correa@gmail.com>
+</span><span class='line'> * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
+</span><span class='line'> * @version   SVN: $Id$ 
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> *  ArithmeticBasicOperations.php
+</span><span class='line'> *
+</span><span class='line'> *
+</span><span class='line'> * @category  Class 
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;jose.bermudez.correa@gmail.com>
+</span><span class='line'> * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
+</span><span class='line'> * @version   Release: $Id$ 
+</span><span class='line'> * 
 </span><span class='line'> */
 </span><span class='line'>class ArithmeticBasicOperations
 </span><span class='line'>{
+</span><span class='line'>
 </span><span class='line'>    /**
-</span><span class='line'>     * Funci&oacute;n que suma dos n&uacute;meros
-</span><span class='line'>     *
-</span><span class='line'>     * @param float $floNumberOne primer entero sumando
-</span><span class='line'>     * @param float $floNumberTwo segundo entero sumando
-</span><span class='line'>     *
+</span><span class='line'>     * Constructor de la clase
+</span><span class='line'>     *      
+</span><span class='line'>     * @return void
+</span><span class='line'>     * @access public
+</span><span class='line'>     * 
+</span><span class='line'>     */
+</span><span class='line'>    public function __construct()
+</span><span class='line'>    {
+</span><span class='line'>        
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    /**
+</span><span class='line'>     * Funcion desctructora 
+</span><span class='line'>     *      
+</span><span class='line'>     * @return void
+</span><span class='line'>     * @access public
+</span><span class='line'>     * 
+</span><span class='line'>     */
+</span><span class='line'>    public function __destruct()
+</span><span class='line'>    {
+</span><span class='line'>        
+</span><span class='line'>    }
+</span><span class='line'>    /**
+</span><span class='line'>     * Funci&oacute;n que suma 2 n&uacute;meros
+</span><span class='line'>     * @param float $floNumberOne
+</span><span class='line'>     * @param float $floNumberTwo
 </span><span class='line'>     * @return float
 </span><span class='line'>     */
-</span><span class='line'>     public function add($floNumberOne,$floNumberTwo)
-</span><span class='line'>     {
-</span><span class='line'>       return  $floNumberOne+$floNumberTwo;
-</span><span class='line'>     }
+</span><span class='line'>    public function add($floNumberOne,$floNumberTwo)
+</span><span class='line'>    {
+</span><span class='line'>        $floTotal = 0;
+</span><span class='line'>        if(is_numeric($floNumberOne) && is_numeric($floNumberTwo)){
+</span><span class='line'>            $floTotal = $floNumberOne+$floNumberTwo;
+</span><span class='line'>        }
+</span><span class='line'>        return $floTotal;
+</span><span class='line'>    }
+</span><span class='line'>
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
-Si ejecutamos nuestro test de nuevo
-<img src="/images/test_php_terminado.png" width="666" height="216" title="El test ha pasado" alt="El test ha pasado">
-Ahora el test ha pasado, el assert que hemos definido ha sido exitoso!
-</p>
 
 
-<p>Para el pr&oacute;ximo post vamos a empezar a agregar otros casos de prueba para nuestro test de
-tal forma que abarquemos escenarios donde la funci&oacute;n add() como est&aacute; en este momento falla.</p>
+
+<p>Si ejecutamos ahora el test:</p>
+
+
+<p><img src="/images/casos_prueba_satisfactorio.png" width="668" height="88" title="ejecutando test phpUnit" alt="ejecutando test phpUnit"></p>
+
+<p>Todas las pruebas han pasado, ahora hemos abarcado mas escenarios y se ha asegurado que nuestra fucnci&oacute;n de sumar esta correcta.<br/>Podemos agregar otros casos, como:  
+<ul>
+<li>
+    La entrada es una array.</li>
+     <li>Un objeto StdClass.</li> 
+    <li>Cualquier otro tipo de dato. </li>
+</ul>
+para verificar que la funci&oacute;n add se comporta correctamente.</p>
+
+
+<p>Para el pr&oacute;ximo post vamos a implementar la funci&oacute;n de resta, agregando interaci&oacute;n con un webservice donde aprenderemos a usar Mock y Stubs.</p>
 
 </div>
 
@@ -370,7 +480,7 @@ tal forma que abarquemos escenarios donde la funci&oacute;n add() como est&aacut
   
 
 
-<time datetime="2013-07-19T08:05:00-05:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2013-07-26T07:40:00-05:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -384,7 +494,7 @@ tal forma que abarquemos escenarios donde la funci&oacute;n add() como est&aacut
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://josebermudez.github.io/blog/2013/07/19/phpunit-plus-tdd-un-ejemplo-practico-ii/" data-via="" data-counturl="http://josebermudez.github.io/blog/2013/07/19/phpunit-plus-tdd-un-ejemplo-practico-ii/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://josebermudez.github.io/blog/2013/07/26/phpunit-plus-tdd-un-ejemplo-practico-iii/" data-via="" data-counturl="http://josebermudez.github.io/blog/2013/07/26/phpunit-plus-tdd-un-ejemplo-practico-iii/" >Tweet</a>
   
   
   
@@ -395,10 +505,8 @@ tal forma que abarquemos escenarios donde la funci&oacute;n add() como est&aacut
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2013/07/12/tdd-un-ejemplo-practico/" title="Previous Post: PhpUnit + TDD un ejemplo pr&aacute;ctico">&laquo; PhpUnit + TDD un ejemplo pr&aacute;ctico</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/07/19/phpunit-plus-tdd-un-ejemplo-practico-ii/" title="Previous Post: PhpUnit + TDD Un Ejemplo Pr&aacute;ctico II">&laquo; PhpUnit + TDD Un Ejemplo Pr&aacute;ctico II</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/07/26/phpunit-plus-tdd-un-ejemplo-practico-iii/" title="Next Post: PhpUnit + TDD un ejemplo pr&aacute;ctico III">PhpUnit + TDD un ejemplo pr&aacute;ctico III &raquo;</a>
       
     </p>
   </footer>
