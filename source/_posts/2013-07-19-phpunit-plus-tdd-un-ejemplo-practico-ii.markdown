@@ -125,14 +125,15 @@ class ArithmeticBasicOperations
 {
     /**
      * Funci&oacute;n que suma dos n&uacute;meros
-     * @param int $intNumberOne primer entero sumando
-     * @param int $intNumberTwo segundo entero sumando
      *
-     * @return int
+     * @param float $floNumberOne primer entero sumando
+     * @param float $floNumberTwo segundo entero sumando
+     *
+     * @return float
      */
-     public function add($intNumberOne,$intNumberTwo)
+     public function add($floNumberOne,$floNumberTwo)
      {
-       return  $intNumberOne+$intNumberTwo;
+       return  $floNumberOne+$floNumberTwo;
      }
 }
 {% endcodeblock %}

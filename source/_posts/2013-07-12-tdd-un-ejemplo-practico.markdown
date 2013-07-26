@@ -15,14 +15,14 @@ demostaremos la utilidad y los beneficios que las pruebas tempranas trae para el
 <strong>Como</strong> visitante del portal<br/> 
 </p>
 <p>
-<strong>Yo quiero</strong> realizar las operaciones b&aacute;sicas de la aritm&eacute;tica<br/> 
+<strong>Yo quiero</strong> realizar las operaciones b&aacute;sicas de la aritm&eacute;tica entre 2 n&uuacute;meros<br/> 
 </p>
 <p>
 <strong>De manera que</strong> pueda sumar, dividir, restar o multiplicar dos n&uacute;meros.<br/> 
 </p>
 Ya tenemos nuestro requisto:
 " debemos realizar un modulo que esta en un portal web que nos permita
-realizar las operaciones b&aacute;sicas de la aritm&eacute;tica ".<br/>
+realizar las operaciones b&aacute;sicas de la aritm&eacute;tica entre 2 n&uuacute;meros ".<br/>
 <span> cual seria nuestro primer paso?</span>
 </p>
 <p>
