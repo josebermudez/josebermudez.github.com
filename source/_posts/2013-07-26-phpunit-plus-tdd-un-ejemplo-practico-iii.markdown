@@ -83,7 +83,7 @@ class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
         );
     }
     /**
-     * Set de datos de prueba para el m$eacute;todo getReportList
+     * Set de datos de prueba para el m&eacute;todo Add
      * 
      * @return array
      */
