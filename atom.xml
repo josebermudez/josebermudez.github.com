@@ -4,7 +4,7 @@
   <title><![CDATA[El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-08-09T11:55:58-05:00</updated>
+  <updated>2013-09-13T10:15:54-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -12,6 +12,240 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico V]]></title>
+    <link href="http://josebermudez.github.io/blog/2013/09/13/phpunit-plus-tdd-un-ejemplo-practico-v/"/>
+    <updated>2013-09-13T07:57:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2013/09/13/phpunit-plus-tdd-un-ejemplo-practico-v</id>
+    <content type="html"><![CDATA[<p><p>
+En esta entrega vamos crear un test donde debemos conectarnos a un WebService para obtener informaci&oacute;n.
+<!-- more -->
+Cuando nuestra test se debe realizar sobre una funcionalidad que se conecta a un WS para interactuar debemos mantener la independencia de nuestro test, es decir, un falla en la comunicaci&oacute;n con el WS o una comunicaci&oacute;n lenta, o que el servicio aun no esta disponible en desarrollo no debe ser impedimento para demostrar que mi funcionalidad es correcta.
+Para resolver este problema podemos usar los Stubs y así&iacute; simular las repuestas del ws. <br/>Veamos un ejemplo.
+<p>Vamos a crear el test para el m&eacute;todo que nos va a permitir dividir 2 n&uacute;meros enteros, pero resulta que esta funcionalidad nos la provee un WS que nos hemos encontrado en internet y nos evita tener que implementar hacer una complicada l&oacute;gica para dividir 2 n&uacute;meros.<br/>
+El WS tiene un m&eacute;todo que se llama dividir y recibe 2 par&aacute;metros, n&uacute;meros enteros y retorna el cociente de la divisi&oacute;n.<br/>
+Nuestra funci&oacute;n para consumir el servicio es la siguiente:
+</p></p>
+
+<p><figure class='code'><figcaption><span>ArithmeticBasicOperations lang: php </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>
+</span><span class='line'>class ArithmeticBasicOperations
+</span><span class='line'>{      <br/>
+</span><span class='line'>    public function divide(SoapClient $objSoap, $intNumberOne = 0,
+</span><span class='line'>        $intNumberTwo = 0)
+</span><span class='line'>    {
+</span><span class='line'>        try {
+</span><span class='line'>            $intDivResult = $objSoap->divide($intNumberOne, $intNumberTwo);
+</span><span class='line'>            return $intDivResult;
+</span><span class='line'>        } catch (Exception $e) {
+</span><span class='line'>            var_dump($e);
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>?></span></code></pre></td></tr></table></div></figure></p>
+
+<p><p>Algo importante es que debemos descargar el wsdl a nuestro ambiente de desarrollo, ya que este contiene la descripci&oacute; de los m&eacute;todos, entradas y salidas del WebService y a partir de all&iacute; es que se crea el stub, para nuestro ejemplo el wsdl es el siguiente: </p></p>
+
+<p><figure class='code'><figcaption><span>divide lang: XML</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version=&ldquo;1.0&rdquo;?>
+</span><span class='line'>&lt;definitions xmlns=&ldquo;<a href="http://schemas.xmlsoap.org/wsdl/">http://schemas.xmlsoap.org/wsdl/</a>&rdquo; xmlns:tns=&ldquo;<a href="http://localhost/switchWs/index.php">http://localhost/switchWs/index.php</a>&rdquo; xmlns:soap=&ldquo;<a href="http://schemas.xmlsoap.org/wsdl/soap/">http://schemas.xmlsoap.org/wsdl/soap/</a>&rdquo; xmlns:xsd=&ldquo;<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>&rdquo; xmlns:soap-enc=&ldquo;<a href="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</a>&rdquo; xmlns:wsdl=&ldquo;<a href="http://schemas.xmlsoap.org/wsdl/">http://schemas.xmlsoap.org/wsdl/</a>&rdquo; name=&ldquo;Service&rdquo; targetNamespace=&ldquo;<a href="http://localhost/switchWs/index.php">http://localhost/switchWs/index.php</a>&rdquo;>
+</span><span class='line'>    &lt;types>
+</span><span class='line'>        &lt;xsd:schema targetNamespace=&ldquo;<a href="http://localhost/switchWs/index.php">http://localhost/switchWs/index.php</a>&rdquo;/>
+</span><span class='line'>    &lt;/types>
+</span><span class='line'>    &lt;portType name=&ldquo;ServicePort&rdquo;>
+</span><span class='line'>        &lt;operation name=&ldquo;divide&rdquo;>
+</span><span class='line'>            &lt;documentation>Funci&#xF3;n que divide dos n&#xFA;meros y retorna el cociente&lt;/documentation>
+</span><span class='line'>            &lt;input message=&ldquo;tns:divideIn&rdquo;/>
+</span><span class='line'>            &lt;output message=&ldquo;tns:divideOut&rdquo;/>
+</span><span class='line'>        &lt;/operation>
+</span><span class='line'>    &lt;/portType>
+</span><span class='line'>    &lt;binding name=&ldquo;ServiceBinding&rdquo; type=&ldquo;tns:ServicePort&rdquo;>
+</span><span class='line'>        &lt;soap:binding style=&ldquo;rpc&rdquo; transport=&ldquo;<a href="http://schemas.xmlsoap.org/soap/http">http://schemas.xmlsoap.org/soap/http</a>&rdquo;/>
+</span><span class='line'>        &lt;operation name=&ldquo;divide&rdquo;>
+</span><span class='line'>            &lt;soap:operation soapAction=&ldquo;<a href="http://localhost/switchWs/index.php#divide">http://localhost/switchWs/index.php#divide</a>&rdquo;/>
+</span><span class='line'>            &lt;input>
+</span><span class='line'>                &lt;soap:body use=&ldquo;encoded&rdquo; encodingStyle=&ldquo;<a href="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</a>&rdquo; namespace=&ldquo;<a href="http://localhost/switchWs/index.php">http://localhost/switchWs/index.php</a>&rdquo;/>
+</span><span class='line'>            &lt;/input>
+</span><span class='line'>            &lt;output>
+</span><span class='line'>                &lt;soap:body use=&ldquo;encoded&rdquo; encodingStyle=&ldquo;<a href="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</a>&rdquo; namespace=&ldquo;<a href="http://localhost/switchWs/index.php">http://localhost/switchWs/index.php</a>&rdquo;/>
+</span><span class='line'>            &lt;/output>
+</span><span class='line'>        &lt;/operation>
+</span><span class='line'>    &lt;/binding>
+</span><span class='line'>    &lt;service name=&ldquo;ServiceService&rdquo;>
+</span><span class='line'>        &lt;port name=&ldquo;ServicePort&rdquo; binding=&ldquo;tns:ServiceBinding&rdquo;>
+</span><span class='line'>            &lt;soap:address location=&ldquo;<a href="http://localhost/switchWs/index.php">http://localhost/switchWs/index.php</a>&rdquo;/>
+</span><span class='line'>        &lt;/port>
+</span><span class='line'>    &lt;/service>
+</span><span class='line'>    &lt;message name=&ldquo;divideIn&rdquo;>
+</span><span class='line'>        &lt;part name=&ldquo;intNumberOne&rdquo; type=&ldquo;xsd:int&rdquo;/>
+</span><span class='line'>        &lt;part name=&ldquo;intNumerTwo&rdquo; type=&ldquo;xsd:int&rdquo;/>
+</span><span class='line'>    &lt;/message>
+</span><span class='line'>    &lt;message name=&ldquo;divideOut&rdquo;>
+</span><span class='line'>        &lt;part name=&ldquo;return&rdquo; type=&ldquo;xsd:int&rdquo;/>
+</span><span class='line'>    &lt;/message>
+</span><span class='line'>&lt;/definitions></span></code></pre></td></tr></table></div></figure></p>
+
+<p><p>Ahora escribamos el test:</p></p>
+
+<p><figure class='code'><figcaption><span>ArithmeticBasicOperationsTest lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+</span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
+</span><span class='line'> <br/>
+</span><span class='line'>     &hellip;
+</span><span class='line'>      /<strong>
+</span><span class='line'>     * Test de la funci&oacute;n que realiza la divisi&oacute;n
+</span><span class='line'>     *
+</span><span class='line'>     * @dataProvider dataProviderDivide
+</span><span class='line'>     *
+</span><span class='line'>     */
+</span><span class='line'>    public function testDivide($stubSoapObject,$numberOne,$numberTwo,$result)
+</span><span class='line'>    {      <br/>
+</span><span class='line'>        $this->assertEquals(
+</span><span class='line'>            $result,          <br/>
+</span><span class='line'>                $this->arithmeticBasicOperations->divide(
+</span><span class='line'>                    $stubSoapObject,
+</span><span class='line'>                    $numberOne,
+</span><span class='line'>                    $numberTwo
+</span><span class='line'>            )
+</span><span class='line'>        );
+</span><span class='line'>    }
+</span><span class='line'>    /</strong>
+</span><span class='line'>     * Set de datos de prueba para el método divide
+</span><span class='line'>     *
+</span><span class='line'>     * @return array
+</span><span class='line'>     */
+</span><span class='line'>    public function dataProviderDivide()
+</span><span class='line'>    {
+</span><span class='line'>        //crea el mock desde el wsdl del servicio
+</span><span class='line'>        $stubSoapObject = $this->getMockFromWsdl(
+</span><span class='line'>          &lsquo;divide.wsdl&rsquo;
+</span><span class='line'>        );     <br/>
+</span><span class='line'>      <br/>
+</span><span class='line'>        $stubSoapObject->expects($this->any())
+</span><span class='line'>                     &ndash;>method(&lsquo;divide&rsquo;)
+</span><span class='line'>                     &ndash;>will($this->returnValue(1));
+</span><span class='line'>        return array(
+</span><span class='line'>                //primer set de datos para el test
+</span><span class='line'>                array($stubSoapObject,5,5,1),
+</span><span class='line'>                    <br/>
+</span><span class='line'>        );
+</span><span class='line'>    }
+</span><span class='line'>    &hellip;
+</span><span class='line'>}
+</span><span class='line'>?></span></code></pre></td></tr></table></div></figure></p>
+
+<p><p>
+La funci&oacute;n que genera el stub desde la definici&oacute;n del WebService (wsdl) es : getMockFromWsdl, como par&aacute;metro se le env&iacute;a la ruta donde esta el archivo wsdl, usanto el m&eacute;todo expects definimos cual es el nombre de la funci&oacute;n del servicio que se a a usar y el valor que retorna. en nuestro caso sabemos que la divisi&oacute;n 5/5 debe retornar el valor 1 y esto lo indicamos con : $this->returnValue(1), si la respuesta del WebService es mas compleja, debemos crear la respuesta y agregarla a la instrucci&oacute;n $this->returnValue($objetoComplejo):
+</p>
+<img src="http://josebermudez.github.io/images/test_stub_ws.png" width="663" height="175" title="Usando Stubs phpUnit WebServices" alt="Usando Stubs phpUnit WebServices">
+<p>El test pasa ya que definimos que el WS retorna 1 y que el resultado que esperamos es 1</p>
+<p>Con este ejemplo hemos demostrado como realizar test sobre funcionalidades que deben conectarse a servicios externos y como nuestro test sigue siendo independiente ya que no necesita conectarse al WebService externo</p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico IV]]></title>
@@ -207,7 +441,7 @@ Si ejecutamos nuestro test va a fallar, entonces escribamos el c&oacute;digo pro
 </span><span class='line'> * PHP Version 5.3.0
 </span><span class='line'> *
 </span><span class='line'> * @category  Class
-</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;<a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#106;&#111;&#x73;&#101;&#46;&#x62;&#101;&#x72;&#x6d;&#x75;&#x64;&#x65;&#x7a;&#x2e;&#99;&#111;&#x72;&#114;&#101;&#97;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x6a;&#111;&#x73;&#101;&#46;&#98;&#x65;&#114;&#x6d;&#x75;&#100;&#x65;&#122;&#x2e;&#99;&#x6f;&#x72;&#x72;&#x65;&#97;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>>
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#106;&#x6f;&#115;&#101;&#46;&#98;&#x65;&#114;&#109;&#x75;&#x64;&#101;&#x7a;&#46;&#x63;&#111;&#114;&#114;&#101;&#97;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#46;&#99;&#x6f;&#x6d;">&#106;&#x6f;&#115;&#x65;&#46;&#x62;&#101;&#x72;&#x6d;&#x75;&#x64;&#x65;&#x7a;&#x2e;&#99;&#x6f;&#114;&#x72;&#101;&#x61;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>>
 </span><span class='line'> * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
 </span><span class='line'> * @version   SVN: $Id$
 </span><span class='line'> *
@@ -218,7 +452,7 @@ Si ejecutamos nuestro test va a fallar, entonces escribamos el c&oacute;digo pro
 </span><span class='line'> *
 </span><span class='line'> *
 </span><span class='line'> * @category  Class
-</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#106;&#x6f;&#115;&#101;&#x2e;&#98;&#x65;&#x72;&#109;&#117;&#x64;&#x65;&#x7a;&#x2e;&#99;&#x6f;&#x72;&#x72;&#101;&#x61;&#x40;&#x67;&#109;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x6a;&#111;&#x73;&#x65;&#x2e;&#x62;&#x65;&#x72;&#109;&#x75;&#x64;&#x65;&#x7a;&#x2e;&#99;&#x6f;&#x72;&#x72;&#101;&#x61;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;</a>>
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#106;&#x6f;&#115;&#101;&#x2e;&#x62;&#101;&#114;&#x6d;&#x75;&#x64;&#101;&#x7a;&#x2e;&#99;&#x6f;&#114;&#x72;&#x65;&#97;&#x40;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#x6a;&#111;&#x73;&#x65;&#46;&#x62;&#x65;&#114;&#x6d;&#117;&#100;&#101;&#x7a;&#46;&#99;&#x6f;&#x72;&#114;&#101;&#x61;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a>>
 </span><span class='line'> * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
 </span><span class='line'> * @version   Release: $Id$
 </span><span class='line'> *
