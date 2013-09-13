@@ -9,7 +9,7 @@ categories: [php, phpUnit, TDD. Mock, stubs, webservice]
 En esta entrega vamos crear un test donde debemos conectarnos a un WebService para obtener informaci&oacute;n.
 <!-- more -->
 Cuando nuestra test se debe realizar sobre una funcionalidad que se conecta a un WS para interactuar debemos mantener la independencia de nuestro test, es decir, un falla en la comunicaci&oacute;n con el WS o una comunicaci&oacute;n lenta, o que el servicio aun no esta disponible en desarrollo no debe ser impedimento para demostrar que mi funcionalidad es correcta.
-Para resolver este problema podemos usar los Stubs y así&iacute; simular las repuestas del ws. <br/>Veamos un ejemplo.
+Para resolver este problema podemos usar los Stubs y as&iacute; simular las repuestas del ws. <br/>Veamos un ejemplo.
 <p>Vamos a crear el test para el m&eacute;todo que nos va a permitir dividir 2 n&uacute;meros enteros, pero resulta que esta funcionalidad nos la provee un WS que nos hemos encontrado en internet y nos evita tener que implementar hacer una complicada l&oacute;gica para dividir 2 n&uacute;meros.<br/>
 El WS tiene un m&eacute;todo que se llama dividir y recibe 2 par&aacute;metros, n&uacute;meros enteros y retorna el cociente de la divisi&oacute;n.<br/>
 Nuestra funci&oacute;n para consumir el servicio es la siguiente:
@@ -98,7 +98,7 @@ class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
         );
     }
     /**
-     * Set de datos de prueba para el método divide
+     * Set de datos de prueba para el m&eacute;todo divide
      * 
      * @return array
      */
