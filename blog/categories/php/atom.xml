@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
+  <link href="http://josebermudez.github.io/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://josebermudez.github.io/"/>
+  <updated>2014-10-07T15:23:42-05:00</updated>
+  <id>http://josebermudez.github.io/</id>
+  <author>
+    <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Entornos de desarrollo virtuales con vagrant]]></title>
+    <link href="http://josebermudez.github.io/blog/2014/10/07/entornos-de-desarrollo-virtuales-con-vagrant/"/>
+    <updated>2014-10-07T09:02:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2014/10/07/entornos-de-desarrollo-virtuales-con-vagrant</id>
+    <content type="html"><![CDATA[<p>
+Vagrant es una herramienta de c贸digo abierto, que nos permite crear y configurar autom谩ticamente
+entornos de desarrollo ajustados a la necesidad de la persona o del equipo de trabajo.
+<!-- more -->
+En las empresas donde he trabajado recuerdo que en los primeros d铆as siempre me encuentro con la tarea
+de tener que configurar mi equipo de trabajo con las herramientas que me hacen la vida de programador mas sencilla.
+Bueno eso ya no va mas con esta herramienta que he conocido y que nos da unas enormes ventajas, ya que de una manera r谩pida podemos construir nuestros
+entornos de desarrollo el cual podemos "destruir" a nuestro antojo.</p>
+
+
+<p>Algunas ventajas Vagrant:</p>
+
+
+<ul>
+<li>Configurar entornos de desarrollo id茅nticos al de test, producci贸n.</li>
+<li>Mantener el mismo software instalado en las maquinas del equipo.</li>
+<li>Personalizaci贸n autom谩tica del entorno de trabajo.</li>
+<li>M煤ltiples versiones del lenguaje de programaci贸n, ( PHP 5.3, PHP 5.4, PHP 5.2 ).</li>
+<li>Crear ambiente desechables para probar el c贸digo en una plataforma espec铆fica. ( linux, windows, etc.)./li>
+</ul>
+
+
+<p>Requisitos para la instalaci贸n:</p>
+
+
+<ul>
+<li><a href="https://www.virtualbox.org/" target="_blank">Instalar virtualbox</a></li>
+<li><a href="http://downloads.vagrantup.com/" target="_blank">Instalador de Vagrant</a></li>
+</ul>
+
+
+<p>Una vez instalado el vagrant procedemos a la configuraci贸n:</p>
+
+
+<ul>
+<li>Crear el Vagrantfile ( vagrant init ).</li>
+<li>Obtener la caja ( vagrant box add mi_caja url_de_la_caja ) <a href="http://www.vagrantbox.es/" target="_blank">aqu铆</a> se pueden descargar m煤ltiples cajas.</li>
+<li>Configurar el Vagranrfile con los datos de la caja.</li>
+<li>Iniciar la maquina ( vagrant up ).</li>
+</ul>
+
+
+<p>En la p谩gina oficial de vagrant se puede encontrar m谩s <a href="https://docs.vagrantup.com/v2/getting-started/index.html" target="_blank">informaci贸n</a> </p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico V]]></title>
+    <link href="http://josebermudez.github.io/blog/2013/09/13/phpunit-plus-tdd-un-ejemplo-practico-v/"/>
+    <updated>2013-09-13T07:57:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2013/09/13/phpunit-plus-tdd-un-ejemplo-practico-v</id>
+    <content type="html"><![CDATA[<p><p>
+En esta entrega vamos crear un test donde debemos conectarnos a un WebService para obtener informaci&oacute;n.
+<!-- more -->
+Cuando nuestra test se debe realizar sobre una funcionalidad que se conecta a un WS para interactuar debemos mantener la independencia de nuestro test, es decir, un falla en la comunicaci&oacute;n con el WS o una comunicaci&oacute;n lenta, o que el servicio aun no esta disponible en desarrollo no debe ser impedimento para demostrar que mi funcionalidad es correcta.
+Para resolver este problema podemos usar los Stubs y as&iacute; simular las repuestas del ws. <br/>Veamos un ejemplo.
+<p>Vamos a crear el test para el m&eacute;todo que nos va a permitir dividir 2 n&uacute;meros enteros, pero resulta que esta funcionalidad nos la provee un WS que nos hemos encontrado en internet y nos evita tener que implementar hacer una complicada l&oacute;gica para dividir 2 n&uacute;meros.<br/>
+El WS tiene un m&eacute;todo que se llama dividir y recibe 2 par&aacute;metros, n&uacute;meros enteros y retorna el cociente de la divisi&oacute;n.<br/>
+Nuestra funci&oacute;n para consumir el servicio es la siguiente:
+</p>
+{% codeblock ArithmeticBasicOperations lang: php %}
+&lt;?php</p>
+
+<p>class ArithmeticBasicOperations
+{</p>
+
+<pre><code>public function divide(SoapClient $objSoap, $intNumberOne = 0,
+    $intNumberTwo = 0)
+{
+    try {
+        $intDivResult = $objSoap-&gt;divide($intNumberOne, $intNumberTwo);
+        return $intDivResult;
+    } catch (Exception $e) {
+        var_dump($e);
+    }
+}
+</code></pre>
+
+<p>}
+?>
+{% endcodeblock %}
+<p>Algo importante es que debemos descargar el wsdl a nuestro ambiente de desarrollo, ya que este contiene la descripci&oacute; de los m&eacute;todos, entradas y salidas del WebService y a partir de all&iacute; es que se crea el stub, para nuestro ejemplo el wsdl es el siguiente: </p>
+{% codeblock divide lang: XML%}
+&lt;?xml version=&ldquo;1.0&rdquo;?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost/switchWs/index.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Service" targetNamespace="http://localhost/switchWs/index.php"></p>
+
+<pre><code>&lt;types&gt;
+    &lt;xsd:schema targetNamespace="http://localhost/switchWs/index.php"/&gt;
+&lt;/types&gt;
+&lt;portType name="ServicePort"&gt;
+    &lt;operation name="divide"&gt;
+        &lt;documentation&gt;Funci&amp;#xF3;n que divide dos n&amp;#xFA;meros y retorna el cociente&lt;/documentation&gt;
+        &lt;input message="tns:divideIn"/&gt;
+        &lt;output message="tns:divideOut"/&gt;
+    &lt;/operation&gt;
+&lt;/portType&gt;
+&lt;binding name="ServiceBinding" type="tns:ServicePort"&gt;
+    &lt;soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/&gt;
+    &lt;operation name="divide"&gt;
+        &lt;soap:operation soapAction="http://localhost/switchWs/index.php#divide"/&gt;
+        &lt;input&gt;
+            &lt;soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/switchWs/index.php"/&gt;
+        &lt;/input&gt;
+        &lt;output&gt;
+            &lt;soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/switchWs/index.php"/&gt;
+        &lt;/output&gt;
+    &lt;/operation&gt;
+&lt;/binding&gt;
+&lt;service name="ServiceService"&gt;
+    &lt;port name="ServicePort" binding="tns:ServiceBinding"&gt;
+        &lt;soap:address location="http://localhost/switchWs/index.php"/&gt;
+    &lt;/port&gt;
+&lt;/service&gt;
+&lt;message name="divideIn"&gt;
+    &lt;part name="intNumberOne" type="xsd:int"/&gt;
+    &lt;part name="intNumerTwo" type="xsd:int"/&gt;
+&lt;/message&gt;
+&lt;message name="divideOut"&gt;
+    &lt;part name="return" type="xsd:int"/&gt;
+&lt;/message&gt;
+</code></pre>
+
+<p></definitions>
+{% endcodeblock %}
+<p>Ahora escribamos el test:</p>
+{% codeblock ArithmeticBasicOperationsTest lang: PHP%}
+&lt;?php
+include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{</p>
+
+<pre><code> ...
+  /**
+ * Test de la funci&amp;oacute;n que realiza la divisi&amp;oacute;n
+ * 
+ * @dataProvider dataProviderDivide
+ * 
+ */
+public function testDivide($stubSoapObject,$numberOne,$numberTwo,$result)
+{        
+    $this-&gt;assertEquals(
+        $result,            
+            $this-&gt;arithmeticBasicOperations-&gt;divide(
+                $stubSoapObject,
+                $numberOne,
+                $numberTwo
+        )
+    );
+}
+/**
+ * Set de datos de prueba para el m&amp;eacute;todo divide
+ * 
+ * @return array
+ */
+public function dataProviderDivide()
+{
+    //crea el mock desde el wsdl del servicio
+    $stubSoapObject = $this-&gt;getMockFromWsdl(
+      'divide.wsdl'
+    );       
+
+    $stubSoapObject-&gt;expects($this-&gt;any())
+                 -&gt;method('divide')
+                 -&gt;will($this-&gt;returnValue(1));
+    return array(
+            //primer set de datos para el test
+            array($stubSoapObject,5,5,1),
+
+    );
+}
+...
+</code></pre>
+
+<p>}
+?>
+{% endcodeblock %}
+<p>
+La funci&oacute;n que genera el stub desde la definici&oacute;n del WebService (wsdl) es : getMockFromWsdl, como par&aacute;metro se le env&iacute;a la ruta donde esta el archivo wsdl, usanto el m&eacute;todo expects definimos cual es el nombre de la funci&oacute;n del servicio que se a a usar y el valor que retorna. en nuestro caso sabemos que la divisi&oacute;n 5/5 debe retornar el valor 1 y esto lo indicamos con : $this->returnValue(1), si la respuesta del WebService es mas compleja, debemos crear la respuesta y agregarla a la instrucci&oacute;n $this->returnValue($objetoComplejo):
+</p>
+{% img /images/test_stub_ws.png 663 175 &lsquo;Usando Stubs phpUnit WebServices&rsquo; &lsquo;Usando Stubs phpUnit WebServices&rsquo; %}
+<p>El test pasa ya que definimos que el WS retorna 1 y que el resultado que esperamos es 1</p>
+<p>Con este ejemplo hemos demostrado como realizar test sobre funcionalidades que deben conectarse a servicios externos y como nuestro test sigue siendo independiente ya que no necesita conectarse al WebService externo</p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico IV]]></title>
+    <link href="http://josebermudez.github.io/blog/2013/08/02/phpunit-plus-tdd-un-ejemplo-practico-iv/"/>
+    <updated>2013-08-02T07:50:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2013/08/02/phpunit-plus-tdd-un-ejemplo-practico-iv</id>
+    <content type="html"><![CDATA[<p><p>
+En esta entrega vamos a ver como podemos usar mocks y stubs para realizar nuestras pruebas unitarias.
+<!-- more -->
+<h2>Stubs</h2>
+<p>Un stub es un objeto que sustituye al objeto real y retorna determinados valores ya definidos.</p>
+<p>Con un ejemplo nos puede quedar mas claro el concepto:<br/>
+<p>Vamos a crear el test para el m&eacute;todo que nos va a permitir restar 2 n&uacute;meros, pero resulta que el m&eacute;todo que vamos a probar internamente invoca una clase que muy amablemente un proveedor amigo va a desarrollar, la clase de nuestro amigo aun no esta terminada, aqu&iacute; es donde entra el concepto del stub, nosotros podemos asegurar que nuestro m&eacute;todo de resta pasa los test sin necesidad de contar con la clase externa.
+</p>
+<p>La clase de nuestro proveedor amigo se llama: Subtracting, el m&eacute;todo que debemos usar se llama subs y recibe dos par&aacute;metros n&uacute;mero enteros y retorna un n&uacute;mero entero, con esta informaci&oacute;n nos basta para definir nuestra clase Stub
+{% codeblock Stub lang: PHP%}
+&lt;?php</p>
+
+<p>class Subtracting
+{</p>
+
+<pre><code>public function subs()
+{
+
+}
+</code></pre>
+
+<p>}
+?>
+{% endcodeblock %}
+</p>
+Ahora podemos crear nuestro test
+{% codeblock Test phpUnit usando Php lang: PHP%}
+&lt;?php
+include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+include_once dirname(<strong>FILE</strong>) . &lsquo;/Subtracting.php&rsquo;;
+class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
+&hellip;
+  /**</p>
+
+<pre><code> * Test de la funci&amp;oacute;n que realiza la resta
+ * 
+ * @dataProvider dataProviderSub
+ * 
+ */
+public function testSub($numberOne,$numberTwo,$result)
+{        
+
+    // Creamos el stub para la clase Subtracting.
+    $stub = $this-&gt;getMock('Subtracting'); 
+    // Configuramos el stub
+    $stub-&gt;expects($this-&gt;any())
+         -&gt;method('sub')
+         -&gt;will($this-&gt;returnValue(5));
+
+    $this-&gt;assertEquals(
+        $result,            
+            $this-&gt;arithmeticBasicOperations-&gt;sub(
+                $numberOne,
+                $numberTwo,
+                $stub
+        )
+    );
+}
+</code></pre>
+
+<p> /**</p>
+
+<pre><code> * Set de datos de prueba para el m&amp;eacute;todo Sub
+ * 
+ * @return array
+ */
+public function dataProviderSub()
+{
+    return array(
+            //primer set de datos para el test
+            array(7,2,5)                
+    );
+}
+</code></pre>
+
+<p>&hellip;
+}
+{% endcodeblock %}
+<ul>
+<li>Con la instrucci&oacute;n getMock estamos creando un mock de una clase ya definidida</li>
+<li>Con la m&eacute;todo expects podemos definir los escenarios y la respuesta que necesitamos del objeto stub</li>
+<li>Con la funci&oacute;n method definimos el m&eacute;todo que vamos a sustituir</li>
+<li>Con el m&eacute;todo will definimos la respuesta esperada</li>
+</ul>
+Si ejecutamos nuestro test va a fallar, entonces escribamos el c&oacute;digo productivo que lo hace pasar.
+{% codeblock Funci&oacute;n aritm&eacute;tica usando Php lang: PHP%}
+&lt;?php</p>
+
+<p>/<em>*
+ *  ArithmeticBasicOperations.php
+ *
+ * PHP Version 5.3.0
+ *
+ * @category  Class
+ * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa <a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x6a;&#x6f;&#115;&#101;&#x2e;&#98;&#x65;&#x72;&#109;&#117;&#100;&#x65;&#x7a;&#x2e;&#99;&#111;&#x72;&#114;&#101;&#x61;&#64;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x6a;&#111;&#x73;&#101;&#46;&#x62;&#101;&#114;&#109;&#117;&#100;&#101;&#122;&#x2e;&#x63;&#111;&#x72;&#114;&#101;&#x61;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a>
+ * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
+ * @version   SVN: $Id$
+ *
+ </em>/</p>
+
+<p>/<strong>
+ *  ArithmeticBasicOperations.php
+ *
+ *
+ * @category  Class
+ * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#106;&#111;&#115;&#101;&#46;&#98;&#101;&#x72;&#x6d;&#117;&#x64;&#x65;&#x7a;&#46;&#x63;&#111;&#x72;&#114;&#101;&#97;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#106;&#x6f;&#x73;&#101;&#46;&#x62;&#101;&#114;&#109;&#x75;&#x64;&#x65;&#x7a;&#46;&#99;&#111;&#114;&#x72;&#x65;&#97;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#46;&#99;&#111;&#x6d;</a>
+ * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
+ * @version   Release: $Id$
+ *
+ */
+class ArithmeticBasicOperations
+{
+&hellip;
+ /</strong></p>
+
+<pre><code> * 
+ * @param float $floNumberOne
+ * @param float $floNumberTwo
+ * @param Substracting $objSubstracting 
+  * 
+ * @return float
+ */
+public function sub($floNumberOne,$floNumberTwo, $objSubstracting)
+{
+    $floTotal = 0;
+    if(is_numeric($floNumberOne) &amp;&amp; is_numeric($floNumberTwo)){
+        $floTotal = $objSubstracting-&gt;sub($floNumberOne,$floNumberTwo);
+    }
+    return $floTotal;
+}
+</code></pre>
+
+<p>&hellip;
+}
+{% endcodeblock %}
+<p>Si ejecutamos el test este pasa y sin necesidad de tener la clase Substracting desarrollada. Podemos modificar el valor de lo que la funci&oacute;n retorna y as&iacute; verificar diferentes escenarios, o crear cuantos test necesitemos modificando el valor del m&eacute;todo will</p>
+<h2>Mocks</h2>
+<p>Un mock es un objeto que sustituyen a los objeto reales y que es capaz de comportarse de una manera determinada, un mock se usa cuando queremos verificar que un m&eacute;todo ha sido invocado o que la clase ha sido correctamente usada, en PhpUnit los stub y mocks se definien usando la misma instrucci&oacute;n getMock, para dejarlo mas claro miremos un ejemplo: </p>
+{% codeblock Test phpUnit Mocks usando Php lang: PHP%}
+&lt;?php
+include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+include_once dirname(<strong>FILE</strong>) . &lsquo;/Subtracting.php&rsquo;;
+class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{
+&hellip;
+   /**</p>
+
+<pre><code> * Test de la funci&amp;oacute;n que realiza la resta usando mock
+ * 
+ * @dataProvider dataProviderSubMock
+ * 
+ */
+public function testSubMock($numberOne,$numberTwo,$result)
+{        
+
+    // Creamos el stub para la clase Subtracting.
+    $stub = $this-&gt;getMock('Subtracting'); 
+    // Configuramos el stub
+    $stub-&gt;expects($this-&gt;exactly(2))
+         -&gt;method('sub')
+         -&gt;will($this-&gt;returnValue(5));
+
+    $this-&gt;assertEquals(
+        $result,            
+            $this-&gt;arithmeticBasicOperations-&gt;sub(
+                $numberOne,
+                $numberTwo,
+                $stub
+        )
+    );
+}
+</code></pre>
+
+<p> /**</p>
+
+<pre><code> * Set de datos de prueba para el m&amp;eacute;todo Sub
+ * 
+ * @return array
+ */
+public function dataProviderSubMock()
+{
+    return array(
+            //primer set de datos para el test
+            array(7,2,5)                
+    );
+}
+</code></pre>
+
+<p>&hellip;
+}
+{% endcodeblock %}
+<p>El test intenta verificar que la funci&oacute;n Sub de la clase Subtracting es llamada 2 veces $this->exactly(2) </p>
+{% img /images/ejecuta_mock_falla.png 657 199 &lsquo;Usando Mocks phpUnit&rsquo; &lsquo;Usando Mocks phpUnit&rsquo; %}
+<p>El test falla ya que la funci&oacute;n Sub solo es llamada una vez</p></p>
+
+<p><p>Para el pr&oacute;ximo post vamos a ver como realizar test independientes que usen llamados a WebServices.</p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico III]]></title>
+    <link href="http://josebermudez.github.io/blog/2013/07/26/phpunit-plus-tdd-un-ejemplo-practico-iii/"/>
+    <updated>2013-07-26T07:40:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2013/07/26/phpunit-plus-tdd-un-ejemplo-practico-iii</id>
+    <content type="html"><![CDATA[<p>
+En esta tercera entrega continuaremos con los test para el requisito de las operaciones matem&aacute;ticas.
+Vamos a agregar m&aacute;s casos de prueba:
+<ul>
+<li>
+    Los par&aacute;metros de entrada son un n&uacute;mero entero y un n&uacute;mero decimal.
+</li>
+<li>
+    Los par&aacute;metros de entrada son dos n&uacute;meros decimales.
+</li>
+<li>
+    Los par&aacute;metros de entrada son 1 n&uacute;mero entero negativo y un n&uacute;mero entero positivo.
+</li>
+<li>
+    Los par&aacute;metros de entrada son 2 n&uacute;mero enteros negativos.
+</li>
+<li>
+    Los par&aacute;metros de entrada son 1 letra del alfabeto y 1 n&uacute;mero entero.
+</li>
+<li>
+    Los par&aacute;metros de entrada son Null y 1 n&uacute;mero entero.
+</li>
+<li>
+   Los par&aacute;metros de entrada son 1 boolean falso y 1 n&uacute;mero entero.
+</li>
+<li>
+   Los par&aacute;metros de entrada son 1 boolean true y 1 n&uacute;mero entero.
+</li>
+</ul>
+
+</p>
+
+
+<!-- more -->
+
+
+<h2>Agregamos los nuevos casos al test</h2>
+
+
+<p>{% codeblock Test phpUnit usando Php lang: PHP%}
+&lt;?php
+include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{</p>
+
+<pre><code> /**
+ * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
+ * 
+ * @var ArithmeticBasicOperations 
+ */
+protected $arithmeticBasicOperations;
+ /**
+ * M&amp;eacute;todo que se ejecuta por cada test
+ * 
+ * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
+ * que se le va a realizar las pruebas asi como los set de datos a usar.
+ * 
+ * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
+ * @version 1.0
+ * 
+ * @return void;
+ * 
+ */
+protected function setUp()
+{
+    //Instanciamos el objeto que vamos a probar
+    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
+}
+
+/**
+ * Test de la funci&amp;oacute;n que realiza la suma
+ * 
+ * @dataProvider dataProviderAdd
+ * 
+ */
+public function testAdd($numberOne,$numberTwo,$result)
+{        
+    $this-&gt;assertEquals(
+        $result,            
+            $this-&gt;arithmeticBasicOperations-&gt;add(
+                $numberOne,
+                $numberTwo
+        )
+    );
+}
+/**
+ * Set de datos de prueba para el m&amp;eacute;todo Add
+ * 
+ * @return array
+ */
+public function dataProviderAdd()
+{
+    return array(
+            //primer set de datos para el test
+            array(1,2,3),
+            //Los par&amp;aacute;metros de entrada son un n鷐ero entero y un n&amp;uacute;mero decimal
+            array(1,2.5,3.5),
+            //Los par&amp;aacute;metros de entrada son dos n&amp;uacute;meros decimales
+            array(1.25,2.50,3.75),
+            //Los par&amp;aacute;metros de entrada son 1 n&amp;uacute;mero entero negativo 
+            //y un n&amp;uacute;mero entero positivo
+            array(-5,17,12),
+           //Los par&amp;aacute;metros de entrada son 2 n&amp;uacute;mero enteros negativos
+            array(-5,-16,-21),   
+            // Los par&amp;aacute;metros de entrada son 1 letra del alfabeto y 1 n&amp;uacute;mero entero
+            array("a",25,0),
+            // Los par&amp;aacute;metros de entrada son Null y 1 n&amp;uacute;mero entero
+            array(null,36,0),
+            // Los par&amp;aacute;metros de entrada son 1 boolean falso y 1 n&amp;uacute;mero entero
+            array(false,21,0),
+            // Los par&amp;aacute;metros de entrada son 1 boolean true y 1 n&amp;uacute;mero entero
+            array(true,21,0),                            
+    );
+}
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
+
+<p> Si ejecutamos el test con nuestros nuevos casos de prueba, hay set de datos de entrada
+que producen fallos en el test, por ejemplo el caso 9 retorna 22 y estamos esperando que retornara 21, con esta prueba se ha detectado que un booleano en una suma se comporta como un 0 si el valor es false y como un 1 si el valor es true, entonces que debemos hacer ?<br/> <strong>modificar nuestro c&oacute;digo para hacer pasar el nuevo caso de prueba</strong>. 
+{% img /images/casos_prueba_fallidos.png 676 318 'ejecutando test phpUnit' 'ejecutando test phpUnit' %}
+</p>
+
+
+<p>El c&oacute;digo productivo queda de la siguiente forma:</p>
+
+
+<p>{% codeblock Funci&oacute;n aritm&eacute;tica usando Php lang: PHP%}
+&lt;?php</p>
+
+<p>/<em>*
+ *  ArithmeticBasicOperations.php
+ *
+ * PHP Version 5.3.0
+ *
+ * @category  Class
+ * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#106;&#x6f;&#x73;&#x65;&#46;&#x62;&#101;&#114;&#x6d;&#x75;&#100;&#101;&#122;&#x2e;&#x63;&#x6f;&#x72;&#x72;&#101;&#x61;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">&#106;&#111;&#115;&#101;&#46;&#x62;&#x65;&#114;&#x6d;&#117;&#x64;&#101;&#122;&#x2e;&#x63;&#x6f;&#x72;&#114;&#x65;&#x61;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>
+ * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
+ * @version   SVN: $Id$
+ *
+ </em>/</p>
+
+<p>/<em>*
+ *  ArithmeticBasicOperations.php
+ *
+ *
+ * @category  Class
+ * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#106;&#111;&#x73;&#101;&#46;&#x62;&#101;&#x72;&#109;&#117;&#100;&#x65;&#x7a;&#46;&#x63;&#x6f;&#114;&#x72;&#x65;&#x61;&#64;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#106;&#111;&#115;&#x65;&#46;&#98;&#x65;&#x72;&#x6d;&#x75;&#x64;&#101;&#122;&#46;&#99;&#x6f;&#x72;&#114;&#101;&#97;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a>
+ * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
+ * @version   Release: $Id$
+ *
+ </em>/
+class ArithmeticBasicOperations
+{</p>
+
+<pre><code>/**
+ * Constructor de la clase
+ *      
+ * @return void
+ * @access public
+ * 
+ */
+public function __construct()
+{
+
+}
+
+/**
+ * Funcion desctructora 
+ *      
+ * @return void
+ * @access public
+ * 
+ */
+public function __destruct()
+{
+
+}
+/**
+ * Funci&amp;oacute;n que suma 2 n&amp;uacute;meros
+ * @param float $floNumberOne
+ * @param float $floNumberTwo
+ * @return float
+ */
+public function add($floNumberOne,$floNumberTwo)
+{
+    $floTotal = 0;
+    if(is_numeric($floNumberOne) &amp;&amp; is_numeric($floNumberTwo)){
+        $floTotal = $floNumberOne+$floNumberTwo;
+    }
+    return $floTotal;
+}
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
+
+<p>Si ejecutamos ahora el test:</p>
+
+
+<p>{% img /images/casos_prueba_satisfactorio.png 668 88 &lsquo;ejecutando test phpUnit&rsquo; &lsquo;ejecutando test phpUnit&rsquo; %}</p>
+
+<p>Todas las pruebas han pasado, ahora hemos abarcado mas escenarios y se ha asegurado que nuestra fucnci&oacute;n de sumar esta correcta.<br/>Podemos agregar otros casos, como:  
+<ul>
+<li>
+    La entrada es una array.</li>
+     <li>Un objeto StdClass.</li> 
+    <li>Cualquier otro tipo de dato. </li>
+</ul>
+para verificar que la funci&oacute;n add se comporta correctamente.</p>
+
+
+<p>Para el pr&oacute;ximo post vamos a implementar la funci&oacute;n de resta, agregando interaci&oacute;n con un webservice donde aprenderemos a usar Mock y Stubs.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PhpUnit + TDD Un Ejemplo Pr&aacute;ctico II]]></title>
+    <link href="http://josebermudez.github.io/blog/2013/07/19/phpunit-plus-tdd-un-ejemplo-practico-ii/"/>
+    <updated>2013-07-19T08:05:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2013/07/19/phpunit-plus-tdd-un-ejemplo-practico-ii</id>
+    <content type="html"><![CDATA[<p>Continuando con nuestro ejemplo, vamos a crear el test para la funcion sumar, de esta forma vamos 
+profundizando en la forma de usar phpUnit.</p>
+
+
+<!-- more -->
+
+
+<h1>Creando nuestro test para la funcionalidad de sumar.</h1>
+
+
+<p>
+De acuerdo al an&aacute;lisis que realizamos en el post anterior para la funci&oacute;n de suma lo que queremos es:
+<ul>
+<li>Un m&eacute;todo para sumar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la suma de los 2 par&aacute;metros de entrada.</li>
+</ul>
+</p>
+
+
+<p><p>
+Escribamos entonces el test, retomando lo que habiamos hecho en el post anterior:
+{% codeblock Test phpUnit usando Php lang: PHP%}
+&lt;?php
+include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{</p>
+
+<pre><code> /**
+ * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
+ * 
+ * @var ArithmeticBasicOperations 
+ */
+protected $arithmeticBasicOperations;
+ /**
+ * M&amp;eacute;todo que se ejecuta por cada test
+ * 
+ * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
+ * que se le va a realizar las pruebas asi como los set de datos a usar.
+ * 
+ * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
+ * @version 1.0
+ * 
+ * @return void;
+ * 
+ */
+protected function setUp()
+{
+    //Instanciamos el objeto que vamos a probar
+    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
+}
+
+/**
+ * Test de la funci&amp;oacute;n que realiza la suma
+ * 
+ * @dataProvider dataProviderAdd
+ * 
+ */
+public function testAdd($numberOne,$numberTwo,$result)
+{        
+    $this-&gt;assertEquals(
+        $result,            
+            $this-&gt;arithmeticBasicOperations-&gt;add(
+                $numberOne,
+                $numberTwo
+        )
+    );
+}
+/**
+ * Set de datos de prueba para el m閠odo getReportList
+ * 
+ * @return array
+ */
+public function dataProviderAdd()
+{
+    return array(
+            //primer set de datos para el test
+            array(1,2,3)
+    );
+}
+</code></pre>
+
+<p>}
+{% endcodeblock %}
+Analizemos el c&oacute;digo:
+<ul>
+<li>El comentario <i>@dataProvider</i> nos indica que el test va a usar una fuente de datos como entrada y que la funci&oacute;n que
+retorna esa fuente se llama: dataProviderAdd, podemos usar cualquier nombre para la funci&oacute;n pero acostumbro anteponer la palabra <strong>dataProvider</strong> para identificarla facilmente.</li>
+<li>El nombre de un test en PhpUnit debe iniciar con la palabra test.</li>
+<li>Los par&aacute;metros de entrada del test estan dados en este caso por el dataProvider, si miramos lo que retorna la funci&oacute;n dataProviderAdd, vemos que el array interno tiene 3 posiciones lo cual indica que el test debe recibir 3 par&aacute;metros.</li>
+<li>Los test de PhpUnit normalmente usan los assert para validar la prueba, en este caso estamos validando que el valor de la variable $result es igual a lo que nos retorna la funci&oacute;n add de la clase ArithmeticBasicOperations, una lista completa de los assert con los que podemos jugar, la pueden ver aqu&iacute;: <a href="http://phpunit.de/manual/current/en/writing-tests-for-phpunit.html#writing-tests-for-phpunit.assertions" target="_blank">lista de asserts.</a> </li>
+</ul>
+<h2>Como ejecutar el test</h2>
+Usando la consola de comandos podemos ejecutar un script de prueba, debemos ir hasta la ruta donde
+tenemos el test y ejecutar en la consola ( windows ):
+{% codeblock Test phpUnit usando Php lang: PHP%}
+phpunit ArithmeticBasicOperationsTest.php
+{% endcodeblock %}
+{% img /images/ejecutando_test_phpUnit.png 671 471 &lsquo;ejecutando test phpUnit&rsquo; &lsquo;ejecutando test phpUnit&rsquo; %}
+El test ha fallado, este el primer paso cuando estamos desarrollando orientado a las pruebas: <strong>nuestro primer test debe fallar</strong>, en nuestro caso ha fallado por que la clase <blockquote>ArithmeticBasicOperations.php</blockquote> no existe.
+</p>
+<h2>Generando la clase ArithmeticBasicOperations.php</h2>
+<p>Para generar la clase que contiene los m&eacute;todos de las operaciones matem&aacute;ticas podemos usar el comando de phpUnit:<br/>
+<blockquote>
+phpunit-skelgen &mdash;class ArithmeticBasicOperationsTest
+</blockquote>
+{% img /images/creando_clase_desde_el_test.png 669 103 &lsquo;creando clase desde el test&rsquo; &lsquo;creando clase desde el test&rsquo; %}
+{% codeblock Clase generada desde el test lang: PHP%}
+&lt;?php
+/<em>*
+ * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
+ </em>/
+class ArithmeticBasicOperations
+{</p>
+
+<pre><code>/**
+ * @todo Implement add().
+ */
+public function add()
+{
+    // Remove the following line when you implement this method.
+    throw new RuntimeException('Not yet implemented.');
+}
+</code></pre>
+
+<p>}
+{% endcodeblock %}
+Modificamos la clase para agregar los par&aacute;metros y las l&iacute;neas de c&oacute;digo necesarias para hacer pasar el test.
+{% codeblock Clase generada desde el test lang: PHP%}
+&lt;?php
+/<em>*
+ * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
+ </em>/
+class ArithmeticBasicOperations
+{</p>
+
+<pre><code>/**
+ * Funci&amp;oacute;n que suma dos n&amp;uacute;meros
+ *
+ * @param float $floNumberOne primer entero sumando
+ * @param float $floNumberTwo segundo entero sumando
+ *
+ * @return float
+ */
+ public function add($floNumberOne,$floNumberTwo)
+ {
+   return  $floNumberOne+$floNumberTwo;
+ }
+</code></pre>
+
+<p>}
+{% endcodeblock %}
+Si ejecutamos nuestro test de nuevo
+{% img /images/test_php_terminado.png 666 216 &lsquo;El test ha pasado&rsquo; &lsquo;El test ha pasado&rsquo; %}
+Ahora el test ha pasado, el assert que hemos definido ha sido exitoso!
+</p>
+<p>Para el pr&oacute;ximo post vamos a empezar a agregar otros casos de prueba para nuestro test de
+tal forma que abarquemos escenarios donde la funci&oacute;n add() como est&aacute; en este momento falla.</p></p>
+]]></content>
+  </entry>
+  
+</feed>
