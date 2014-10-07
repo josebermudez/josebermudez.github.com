@@ -1,5 +1,6 @@
 ---
 layout: post
+author: "Jose Joaquin Bermudez Correa"
 title: "PhpUnit + TDD un ejemplo pr&aacute;ctico V"
 date: 2013-09-13 07:57
 comments: true
