@@ -63,22 +63,22 @@ default_asides: [asides/about_me.html, asides/linkedIn.html, asides/recent_posts
 # ----------------------- #
 
 # Github repositories
-github_user:
-github_repo_count: 0
+github_user: josebermudez
+github_repo_count: 1
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: josejbermdez
 twitter_tweet_button: true
 
 # Google +1
-google_plus_one: false
+google_plus_one: true
 google_plus_one_size: medium
 
 # Google Plus Profile
 # Hidden: No visible button, just add author information to search results
-googleplus_user:
+googleplus_user: 105402318520007558942
 googleplus_hidden: false
 
 # Pinboard
@@ -92,6 +92,9 @@ delicious_count: 3
 # Disqus Comments
 disqus_short_name:
 disqus_show_comment_count: false
+
+# linkedin
+linkedin_user: josejoaquinbermudezcorrea
 
 # Google Analytics
 google_analytics_tracking_id: UA-43471108-1
