@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2013-09-13T10:18:30-05:00</updated>
+  <updated>2014-10-07T15:47:17-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Entornos de desarrollo virtuales con vagrant]]></title>
+    <link href="http://josebermudez.github.io/blog/2014/10/07/entornos-de-desarrollo-virtuales-con-vagrant/"/>
+    <updated>2014-10-07T09:02:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2014/10/07/entornos-de-desarrollo-virtuales-con-vagrant</id>
+    <content type="html"><![CDATA[<p>
+Vagrant es una herramienta de código abierto, que nos permite crear y configurar automáticamente
+entornos de desarrollo ajustados a la necesidad de la persona o del equipo de trabajo.
+<!-- more -->
+En las empresas donde he trabajado recuerdo que en los primeros días siempre me encuentro con la tarea
+de tener que configurar mi equipo de trabajo con las herramientas que me hacen la vida de programador mas sencilla.
+Bueno eso ya no va mas con esta herramienta que he conocido y que nos da unas enormes ventajas, ya que de una manera rápida podemos construir nuestros
+entornos de desarrollo el cual podemos "destruir" a nuestro antojo.</p>
+
+
+<p>Algunas ventajas Vagrant:</p>
+
+
+<ul>
+<li>Configurar entornos de desarrollo idénticos al de test, producción.</li>
+<li>Mantener el mismo software instalado en las maquinas del equipo.</li>
+<li>Personalización automática del entorno de trabajo.</li>
+<li>Múltiples versiones del lenguaje de programación, ( PHP 5.3, PHP 5.4, PHP 5.2 ).</li>
+<li>Crear ambiente desechables para probar el código en una plataforma específica. ( linux, windows, etc.)./li>
+</ul>
+
+
+<p>Requisitos para la instalación:</p>
+
+
+<ul>
+<li><a href="https://www.virtualbox.org/" target="_blank">Instalar virtualbox</a></li>
+<li><a href="http://downloads.vagrantup.com/" target="_blank">Instalador de Vagrant</a></li>
+</ul>
+
+
+<p>Una vez instalado el vagrant procedemos a la configuración:</p>
+
+
+<ul>
+<li>Crear el Vagrantfile ( vagrant init ).</li>
+<li>Obtener la caja ( vagrant box add mi_caja url_de_la_caja ) <a href="http://www.vagrantbox.es/" target="_blank">aquí</a> se pueden descargar múltiples cajas.</li>
+<li>Configurar el Vagranrfile con los datos de la caja.</li>
+<li>Iniciar la maquina ( vagrant up ).</li>
+</ul>
+
+
+<p>En la página oficial de vagrant se puede encontrar más <a href="https://docs.vagrantup.com/v2/getting-started/index.html" target="_blank">información</a> </p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico V]]></title>
@@ -463,7 +515,7 @@ Si ejecutamos nuestro test va a fallar, entonces escribamos el c&oacute;digo pro
 </span><span class='line'> * PHP Version 5.3.0
 </span><span class='line'> *
 </span><span class='line'> * @category  Class
-</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x6a;&#x6f;&#x73;&#101;&#46;&#98;&#x65;&#114;&#x6d;&#x75;&#x64;&#101;&#122;&#46;&#99;&#x6f;&#114;&#x72;&#101;&#97;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x6a;&#111;&#115;&#x65;&#x2e;&#98;&#101;&#x72;&#109;&#x75;&#x64;&#101;&#x7a;&#x2e;&#99;&#x6f;&#114;&#114;&#x65;&#97;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;&lt;/a>
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#106;&#x6f;&#115;&#x65;&#46;&#x62;&#x65;&#114;&#109;&#x75;&#100;&#x65;&#122;&#46;&#99;&#x6f;&#114;&#114;&#x65;&#97;&#64;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x6a;&#x6f;&#115;&#x65;&#x2e;&#98;&#101;&#114;&#x6d;&#x75;&#x64;&#x65;&#122;&#x2e;&#99;&#111;&#114;&#114;&#101;&#97;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#109;&lt;/a>
 </span><span class='line'> * @license   &lt;a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php&lt;/a>  BSD License
 </span><span class='line'> * @version   SVN: $Id$
 </span><span class='line'> *
@@ -474,7 +526,7 @@ Si ejecutamos nuestro test va a fallar, entonces escribamos el c&oacute;digo pro
 </span><span class='line'> *
 </span><span class='line'> *
 </span><span class='line'> * @category  Class
-</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6a;&#x6f;&#x73;&#x65;&#x2e;&#x62;&#101;&#x72;&#109;&#x75;&#x64;&#x65;&#122;&#x2e;&#99;&#x6f;&#x72;&#x72;&#101;&#x61;&#x40;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#106;&#111;&#x73;&#101;&#x2e;&#98;&#101;&#x72;&#x6d;&#117;&#100;&#101;&#x7a;&#46;&#x63;&#x6f;&#114;&#x72;&#101;&#x61;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;&lt;/a>
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#x6a;&#x6f;&#x73;&#101;&#46;&#x62;&#101;&#114;&#x6d;&#117;&#100;&#x65;&#122;&#46;&#x63;&#x6f;&#x72;&#x72;&#x65;&#97;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#106;&#111;&#x73;&#x65;&#46;&#98;&#101;&#114;&#109;&#x75;&#100;&#101;&#122;&#x2e;&#x63;&#111;&#114;&#114;&#x65;&#97;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;&lt;/a>
 </span><span class='line'> * @license   &lt;a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php&lt;/a>  BSD License
 </span><span class='line'> * @version   Release: $Id$
 </span><span class='line'> *
@@ -898,7 +950,7 @@ que producen fallos en el test, por ejemplo el caso 9 retorna 22 y estamos esper
 </span><span class='line'> * PHP Version 5.3.0
 </span><span class='line'> *
 </span><span class='line'> * @category  Class
-</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x6a;&#111;&#x73;&#101;&#x2e;&#98;&#x65;&#x72;&#109;&#117;&#x64;&#101;&#122;&#46;&#x63;&#x6f;&#114;&#x72;&#101;&#97;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#106;&#111;&#115;&#x65;&#x2e;&#98;&#101;&#114;&#109;&#117;&#x64;&#x65;&#x7a;&#x2e;&#x63;&#111;&#x72;&#114;&#x65;&#x61;&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#x6d;&lt;/a>
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x6a;&#111;&#x73;&#101;&#46;&#98;&#x65;&#x72;&#x6d;&#x75;&#100;&#x65;&#122;&#46;&#x63;&#x6f;&#114;&#x72;&#x65;&#x61;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x6a;&#x6f;&#x73;&#x65;&#x2e;&#x62;&#x65;&#114;&#x6d;&#117;&#x64;&#x65;&#x7a;&#46;&#x63;&#111;&#x72;&#x72;&#x65;&#97;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;&lt;/a>
 </span><span class='line'> * @license   &lt;a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php&lt;/a>  BSD License
 </span><span class='line'> * @version   SVN: $Id$
 </span><span class='line'> *
@@ -909,7 +961,7 @@ que producen fallos en el test, por ejemplo el caso 9 retorna 22 y estamos esper
 </span><span class='line'> *
 </span><span class='line'> *
 </span><span class='line'> * @category  Class
-</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#106;&#111;&#115;&#101;&#x2e;&#x62;&#101;&#x72;&#x6d;&#x75;&#x64;&#x65;&#122;&#46;&#99;&#x6f;&#114;&#114;&#x65;&#97;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#x6a;&#x6f;&#x73;&#101;&#46;&#x62;&#x65;&#x72;&#x6d;&#117;&#x64;&#x65;&#122;&#x2e;&#x63;&#x6f;&#x72;&#x72;&#101;&#97;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#109;&lt;/a>
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#106;&#x6f;&#x73;&#101;&#x2e;&#98;&#x65;&#x72;&#x6d;&#x75;&#100;&#101;&#122;&#46;&#x63;&#x6f;&#114;&#114;&#x65;&#x61;&#64;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x6a;&#x6f;&#x73;&#x65;&#x2e;&#98;&#x65;&#x72;&#x6d;&#x75;&#100;&#x65;&#x7a;&#x2e;&#x63;&#111;&#114;&#x72;&#101;&#x61;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#x6d;&lt;/a>
 </span><span class='line'> * @license   &lt;a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php&lt;/a>  BSD License
 </span><span class='line'> * @version   Release: $Id$
 </span><span class='line'> *
@@ -1234,139 +1286,6 @@ Ahora el test ha pasado, el assert que hemos definido ha sido exitoso!
 </p>
 <p>Para el pr&oacute;ximo post vamos a empezar a agregar otros casos de prueba para nuestro test de
 tal forma que abarquemos escenarios donde la funci&oacute;n add() como est&aacute; en este momento falla.</p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PhpUnit + TDD un ejemplo pr&aacute;ctico]]></title>
-    <link href="http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico/"/>
-    <updated>2013-07-12T07:21:00-05:00</updated>
-    <id>http://josebermudez.github.io/blog/2013/07/12/tdd-un-ejemplo-practico</id>
-    <content type="html"><![CDATA[<p>
-Para entender mejor el tema de las pruebas unitarias en PHP vamos a crear un ejemplo donde 
-demostaremos la utilidad y los beneficios que las pruebas tempranas trae para el desarrollo de un producto de software, ademas descrubriremos mediante TDD como podemos ir construyendo paso a paso nuestro c&oacute;digo productivo y lo mejor, con menos posibilidades de fallo.</p>
-
-
-<!-- more -->
-
-
-<p>Ahora si manos a la obra, vamos a suponer que nuestro sprint back log nos entrega el siguiente requisito (historia de usuario):
-</p>
-
-
-<p>
-<strong>Como</strong> visitante del portal<br/> 
-</p>
-
-
-<p>
-<strong>Yo quiero</strong> realizar las operaciones b&aacute;sicas de la aritm&eacute;tica entre 2 n&uuacute;meros<br/> 
-</p>
-
-
-<p>
-<strong>De manera que</strong> pueda sumar, dividir, restar o multiplicar dos n&uacute;meros.<br/> 
-</p>
-
-
-<p>Ya tenemos nuestro requisto:
-&ldquo; debemos realizar un modulo que esta en un portal web que nos permita
-realizar las operaciones b&aacute;sicas de la aritm&eacute;tica entre 2 n&uuacute;meros &rdquo;.<br/>
-<span> cual seria nuestro primer paso?</span>
-</p></p>
-
-<p>
-Normalmente nuestra respuesta ser&iacute;a: realizar el diagrama de clases, o empezar  a escribir c&oacute;digo, 
-aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
-<strong> &iexcl; Escribir la prueba !</strong>
-</p>
-
-
-<p>De acuerdo a la historia de usuario vamos a analizar que necesitamos:</p>
-
-<ul>
-<li>Una clase que contenga los m&eacute;todos para las operaciones b&aacute;sicas.</li>
-<li>Un m&eacute;todo para sumar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la suma de los 2 par&aacute;metros de entrada.</li>
-<li>Un m&eacute;todo para restar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es la resta de los 2 par&aacute;metros de entrada.</li>
-<li>Un m&eacute;todo para dividir que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el cociente de la divisi&oacute;n de los 2 par&aacute;metros de entrada.</li>
-<li>Un m&eacute;todo para multiplicar que reciba 2 n&uacute;meros y retorne 1 n&uacute;mero que es el resultado de la multiplicacipon de 2 n&uacute;meros.</li>
-</ul>
-
-
-<p><p>
-Ya con una idea inicial de que funciones debe tener nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
-La clase de prueba extiende de una clase llamada PHPUnit_Framework_TestCase y es la que nos indica que estamos programando un test y nos permite usar todas las caracter&iacute;sticas de PhpUnit.
-</p>
-<p>
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;pre>&lt;code> /**
-</span><span class='line'> * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
-</span><span class='line'> * 
-</span><span class='line'> * @var ArithmeticBasicOperations 
-</span><span class='line'> */
-</span><span class='line'>protected $arithmeticBasicOperations;
-</span><span class='line'> /**
-</span><span class='line'> * M&amp;eacute;todo que se ejecuta por cada test
-</span><span class='line'> * 
-</span><span class='line'> * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
-</span><span class='line'> * que se le va a realizar las pruebas asi como los set de datos a usar.
-</span><span class='line'> * 
-</span><span class='line'> * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
-</span><span class='line'> * @version 1.0
-</span><span class='line'> * 
-</span><span class='line'> * @return void;
-</span><span class='line'> * 
-</span><span class='line'> */
-</span><span class='line'>protected function setUp()
-</span><span class='line'>{
-</span><span class='line'>    //Instanciamos el objeto que vamos a probar
-</span><span class='line'>    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
-</span><span class='line'>}
-</span><span class='line'>&lt;/code>&lt;/pre>
-</span><span class='line'>
-</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
-Todo script de test debe sobreescribir el m&eacute;todo setUp que se encuentra en la clase <blockquote>PHPUnit_Framework_TestCase</blockquote>
-</p>
-<p>Para el pr&oacute;ximo post vamos a empezar a codificar nuestro test para probar la funcionalidad de sumar</p></p>
 ]]></content>
   </entry>
   
