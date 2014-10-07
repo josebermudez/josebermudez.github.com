@@ -10,9 +10,10 @@ categories: [vagrant,php]
 Vagrant es una herramienta de código abierto, que nos permite crear y configurar automáticamente
 entornos de desarrollo ajustados a la necesidad de la persona o del equipo de trabajo.
 <!-- more -->
-Recuerdo que en las empresas donde he trabajado los primeros días siempre me encuentro con la tarea
+En las empresas donde he trabajado recuerdo que en los primeros días siempre me encuentro con la tarea
 de tener que configurar mi equipo de trabajo con las herramientas que me hacen la vida de programador mas sencilla.
-Bueno eso ya no va mas, con esta herramienta que he conocido y que presenta unas enormes ventajas, ya que de una manera rápida podemos construir nuestros entornos de desarrollo el cual podemos "destruir" a nuestro antojo.</p>
+Bueno eso ya no va mas con esta herramienta que he conocido y que nos da unas enormes ventajas, ya que de una manera rápida podemos construir nuestros
+entornos de desarrollo el cual podemos "destruir" a nuestro antojo.</p>
 <p>Algunas ventajas Vagrant:</p>
 <ul>
 <li>Configurar entornos de desarrollo idénticos al de test, producción.</li>
