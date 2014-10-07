@@ -64,7 +64,7 @@ default_asides: [asides/about_me.html, asides/linkedIn.html, asides/recent_posts
 
 # Github repositories
 github_user: josebermudez
-github_repo_count: 1
+github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
@@ -92,6 +92,7 @@ delicious_count: 3
 # Disqus Comments
 disqus_short_name:
 disqus_show_comment_count: false
+
 
 # linkedin
 linkedin_user: josejoaquinbermudezcorrea
