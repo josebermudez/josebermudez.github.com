@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
   <link href="http://josebermudez.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://josebermudez.github.io/"/>
-  <updated>2014-10-07T11:16:33-05:00</updated>
+  <updated>2014-10-07T11:18:08-05:00</updated>
   <id>http://josebermudez.github.io/</id>
   <author>
     <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
@@ -57,168 +57,309 @@ Vamos a agregar m&aacute;s casos de prueba:
 <h2>Agregamos los nuevos casos al test</h2>
 
 
-<p>{% codeblock Test phpUnit usando Php lang: PHP%}
-&lt;?php
-include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
-class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{</p>
-
-<pre><code> /**
- * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
- * 
- * @var ArithmeticBasicOperations 
- */
-protected $arithmeticBasicOperations;
- /**
- * M&amp;eacute;todo que se ejecuta por cada test
- * 
- * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
- * que se le va a realizar las pruebas asi como los set de datos a usar.
- * 
- * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
- * @version 1.0
- * 
- * @return void;
- * 
- */
-protected function setUp()
-{
-    //Instanciamos el objeto que vamos a probar
-    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
-}
-
-/**
- * Test de la funci&amp;oacute;n que realiza la suma
- * 
- * @dataProvider dataProviderAdd
- * 
- */
-public function testAdd($numberOne,$numberTwo,$result)
-{        
-    $this-&gt;assertEquals(
-        $result,            
-            $this-&gt;arithmeticBasicOperations-&gt;add(
-                $numberOne,
-                $numberTwo
-        )
-    );
-}
-/**
- * Set de datos de prueba para el m&amp;eacute;todo Add
- * 
- * @return array
- */
-public function dataProviderAdd()
-{
-    return array(
-            //primer set de datos para el test
-            array(1,2,3),
-            //Los par&amp;aacute;metros de entrada son un número entero y un n&amp;uacute;mero decimal
-            array(1,2.5,3.5),
-            //Los par&amp;aacute;metros de entrada son dos n&amp;uacute;meros decimales
-            array(1.25,2.50,3.75),
-            //Los par&amp;aacute;metros de entrada son 1 n&amp;uacute;mero entero negativo 
-            //y un n&amp;uacute;mero entero positivo
-            array(-5,17,12),
-           //Los par&amp;aacute;metros de entrada son 2 n&amp;uacute;mero enteros negativos
-            array(-5,-16,-21),   
-            // Los par&amp;aacute;metros de entrada son 1 letra del alfabeto y 1 n&amp;uacute;mero entero
-            array("a",25,0),
-            // Los par&amp;aacute;metros de entrada son Null y 1 n&amp;uacute;mero entero
-            array(null,36,0),
-            // Los par&amp;aacute;metros de entrada son 1 boolean falso y 1 n&amp;uacute;mero entero
-            array(false,21,0),
-            // Los par&amp;aacute;metros de entrada son 1 boolean true y 1 n&amp;uacute;mero entero
-            array(true,21,0),                            
-    );
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>include_once dirname(&lt;strong>FILE&lt;/strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+</span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code> /**
+</span><span class='line'> * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
+</span><span class='line'> * 
+</span><span class='line'> * @var ArithmeticBasicOperations 
+</span><span class='line'> */
+</span><span class='line'>protected $arithmeticBasicOperations;
+</span><span class='line'> /**
+</span><span class='line'> * M&amp;eacute;todo que se ejecuta por cada test
+</span><span class='line'> * 
+</span><span class='line'> * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
+</span><span class='line'> * que se le va a realizar las pruebas asi como los set de datos a usar.
+</span><span class='line'> * 
+</span><span class='line'> * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
+</span><span class='line'> * @version 1.0
+</span><span class='line'> * 
+</span><span class='line'> * @return void;
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>protected function setUp()
+</span><span class='line'>{
+</span><span class='line'>    //Instanciamos el objeto que vamos a probar
+</span><span class='line'>    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * Test de la funci&amp;oacute;n que realiza la suma
+</span><span class='line'> * 
+</span><span class='line'> * @dataProvider dataProviderAdd
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>public function testAdd($numberOne,$numberTwo,$result)
+</span><span class='line'>{        
+</span><span class='line'>    $this-&gt;assertEquals(
+</span><span class='line'>        $result,            
+</span><span class='line'>            $this-&gt;arithmeticBasicOperations-&gt;add(
+</span><span class='line'>                $numberOne,
+</span><span class='line'>                $numberTwo
+</span><span class='line'>        )
+</span><span class='line'>    );
+</span><span class='line'>}
+</span><span class='line'>/**
+</span><span class='line'> * Set de datos de prueba para el m&amp;eacute;todo Add
+</span><span class='line'> * 
+</span><span class='line'> * @return array
+</span><span class='line'> */
+</span><span class='line'>public function dataProviderAdd()
+</span><span class='line'>{
+</span><span class='line'>    return array(
+</span><span class='line'>            //primer set de datos para el test
+</span><span class='line'>            array(1,2,3),
+</span><span class='line'>            //Los par&amp;aacute;metros de entrada son un número entero y un n&amp;uacute;mero decimal
+</span><span class='line'>            array(1,2.5,3.5),
+</span><span class='line'>            //Los par&amp;aacute;metros de entrada son dos n&amp;uacute;meros decimales
+</span><span class='line'>            array(1.25,2.50,3.75),
+</span><span class='line'>            //Los par&amp;aacute;metros de entrada son 1 n&amp;uacute;mero entero negativo 
+</span><span class='line'>            //y un n&amp;uacute;mero entero positivo
+</span><span class='line'>            array(-5,17,12),
+</span><span class='line'>           //Los par&amp;aacute;metros de entrada son 2 n&amp;uacute;mero enteros negativos
+</span><span class='line'>            array(-5,-16,-21),   
+</span><span class='line'>            // Los par&amp;aacute;metros de entrada son 1 letra del alfabeto y 1 n&amp;uacute;mero entero
+</span><span class='line'>            array("a",25,0),
+</span><span class='line'>            // Los par&amp;aacute;metros de entrada son Null y 1 n&amp;uacute;mero entero
+</span><span class='line'>            array(null,36,0),
+</span><span class='line'>            // Los par&amp;aacute;metros de entrada son 1 boolean falso y 1 n&amp;uacute;mero entero
+</span><span class='line'>            array(false,21,0),
+</span><span class='line'>            // Los par&amp;aacute;metros de entrada son 1 boolean true y 1 n&amp;uacute;mero entero
+</span><span class='line'>            array(true,21,0),                            
+</span><span class='line'>    );
+</span><span class='line'>}
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p> Si ejecutamos el test con nuestros nuevos casos de prueba, hay set de datos de entrada
 que producen fallos en el test, por ejemplo el caso 9 retorna 22 y estamos esperando que retornara 21, con esta prueba se ha detectado que un booleano en una suma se comporta como un 0 si el valor es false y como un 1 si el valor es true, entonces que debemos hacer ?<br/> <strong>modificar nuestro c&oacute;digo para hacer pasar el nuevo caso de prueba</strong>. 
-{% img /images/casos_prueba_fallidos.png 676 318 'ejecutando test phpUnit' 'ejecutando test phpUnit' %}
+<img src="/images/casos_prueba_fallidos.png" width="676" height="318" title="ejecutando test phpUnit" alt="ejecutando test phpUnit">
 </p>
 
 
 <p>El c&oacute;digo productivo queda de la siguiente forma:</p>
 
 
-<p>{% codeblock Funci&oacute;n aritm&eacute;tica usando Php lang: PHP%}
-&lt;?php</p>
-
-<p>/<em>*
- *  ArithmeticBasicOperations.php
- *
- * PHP Version 5.3.0
- *
- * @category  Class
- * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#106;&#x6f;&#115;&#x65;&#x2e;&#x62;&#101;&#114;&#x6d;&#117;&#x64;&#x65;&#x7a;&#46;&#x63;&#111;&#114;&#114;&#101;&#97;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;">&#106;&#x6f;&#115;&#101;&#46;&#x62;&#x65;&#114;&#x6d;&#117;&#100;&#x65;&#x7a;&#46;&#x63;&#111;&#114;&#x72;&#101;&#97;&#64;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a>
- * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
- * @version   SVN: $Id$
- *
- </em>/</p>
-
-<p>/<em>*
- *  ArithmeticBasicOperations.php
- *
- *
- * @category  Class
- * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x6a;&#111;&#115;&#x65;&#x2e;&#x62;&#101;&#x72;&#x6d;&#x75;&#x64;&#101;&#x7a;&#x2e;&#99;&#x6f;&#x72;&#x72;&#101;&#x61;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#x6a;&#111;&#x73;&#101;&#46;&#98;&#x65;&#114;&#x6d;&#117;&#x64;&#101;&#x7a;&#x2e;&#x63;&#x6f;&#114;&#114;&#101;&#97;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>
- * @license   <a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php</a>  BSD License
- * @version   Release: $Id$
- *
- </em>/
-class ArithmeticBasicOperations
-{</p>
-
-<pre><code>/**
- * Constructor de la clase
- *      
- * @return void
- * @access public
- * 
- */
-public function __construct()
-{
-
-}
-
-/**
- * Funcion desctructora 
- *      
- * @return void
- * @access public
- * 
- */
-public function __destruct()
-{
-
-}
-/**
- * Funci&amp;oacute;n que suma 2 n&amp;uacute;meros
- * @param float $floNumberOne
- * @param float $floNumberTwo
- * @return float
- */
-public function add($floNumberOne,$floNumberTwo)
-{
-    $floTotal = 0;
-    if(is_numeric($floNumberOne) &amp;&amp; is_numeric($floNumberTwo)){
-        $floTotal = $floNumberOne+$floNumberTwo;
-    }
-    return $floTotal;
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Funci&oacute;n aritm&eacute;tica usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>/&lt;em>*
+</span><span class='line'> *  ArithmeticBasicOperations.php
+</span><span class='line'> *
+</span><span class='line'> * PHP Version 5.3.0
+</span><span class='line'> *
+</span><span class='line'> * @category  Class
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#106;&#x6f;&#x73;&#101;&#46;&#98;&#101;&#x72;&#x6d;&#x75;&#x64;&#101;&#x7a;&#x2e;&#99;&#x6f;&#x72;&#x72;&#x65;&#x61;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;">&#x6a;&#111;&#115;&#101;&#46;&#98;&#101;&#114;&#109;&#117;&#x64;&#x65;&#122;&#46;&#x63;&#x6f;&#114;&#114;&#101;&#x61;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;&lt;/a>
+</span><span class='line'> * @license   &lt;a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php&lt;/a>  BSD License
+</span><span class='line'> * @version   SVN: $Id$
+</span><span class='line'> *
+</span><span class='line'> &lt;/em>/&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>/&lt;em>*
+</span><span class='line'> *  ArithmeticBasicOperations.php
+</span><span class='line'> *
+</span><span class='line'> *
+</span><span class='line'> * @category  Class
+</span><span class='line'> * @author    Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa &lt;a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x6a;&#111;&#x73;&#x65;&#46;&#98;&#x65;&#114;&#x6d;&#117;&#100;&#101;&#122;&#x2e;&#99;&#111;&#x72;&#114;&#x65;&#x61;&#x40;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;">&#106;&#x6f;&#x73;&#x65;&#46;&#x62;&#x65;&#114;&#109;&#x75;&#100;&#101;&#x7a;&#x2e;&#99;&#x6f;&#x72;&#x72;&#x65;&#x61;&#64;&#103;&#x6d;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;&lt;/a>
+</span><span class='line'> * @license   &lt;a href="http://www.opensource.org/licenses/bsd-license.php">http://www.opensource.org/licenses/bsd-license.php&lt;/a>  BSD License
+</span><span class='line'> * @version   Release: $Id$
+</span><span class='line'> *
+</span><span class='line'> &lt;/em>/
+</span><span class='line'>class ArithmeticBasicOperations
+</span><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>/**
+</span><span class='line'> * Constructor de la clase
+</span><span class='line'> *      
+</span><span class='line'> * @return void
+</span><span class='line'> * @access public
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>public function __construct()
+</span><span class='line'>{
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * Funcion desctructora 
+</span><span class='line'> *      
+</span><span class='line'> * @return void
+</span><span class='line'> * @access public
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>public function __destruct()
+</span><span class='line'>{
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>/**
+</span><span class='line'> * Funci&amp;oacute;n que suma 2 n&amp;uacute;meros
+</span><span class='line'> * @param float $floNumberOne
+</span><span class='line'> * @param float $floNumberTwo
+</span><span class='line'> * @return float
+</span><span class='line'> */
+</span><span class='line'>public function add($floNumberOne,$floNumberTwo)
+</span><span class='line'>{
+</span><span class='line'>    $floTotal = 0;
+</span><span class='line'>    if(is_numeric($floNumberOne) &amp;&amp; is_numeric($floNumberTwo)){
+</span><span class='line'>        $floTotal = $floNumberOne+$floNumberTwo;
+</span><span class='line'>    }
+</span><span class='line'>    return $floTotal;
+</span><span class='line'>}
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Si ejecutamos ahora el test:</p>
 
 
-<p>{% img /images/casos_prueba_satisfactorio.png 668 88 &lsquo;ejecutando test phpUnit&rsquo; &lsquo;ejecutando test phpUnit&rsquo; %}</p>
+<p><img src="/images/casos_prueba_satisfactorio.png" width="668" height="88" title="&lsquo;ejecutando test phpUnit&rsquo; &lsquo;ejecutando test phpUnit&rsquo;" ></p>
 
 <p>Todas las pruebas han pasado, ahora hemos abarcado mas escenarios y se ha asegurado que nuestra fucnci&oacute;n de sumar esta correcta.<br/>Podemos agregar otros casos, como:  
 <ul>
@@ -260,67 +401,125 @@ De acuerdo al an&aacute;lisis que realizamos en el post anterior para la funci&o
 
 <p><p>
 Escribamos entonces el test, retomando lo que habiamos hecho en el post anterior:
-{% codeblock Test phpUnit usando Php lang: PHP%}
-&lt;?php
-include_once dirname(<strong>FILE</strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
-class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{</p>
-
-<pre><code> /**
- * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
- * 
- * @var ArithmeticBasicOperations 
- */
-protected $arithmeticBasicOperations;
- /**
- * M&amp;eacute;todo que se ejecuta por cada test
- * 
- * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
- * que se le va a realizar las pruebas asi como los set de datos a usar.
- * 
- * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
- * @version 1.0
- * 
- * @return void;
- * 
- */
-protected function setUp()
-{
-    //Instanciamos el objeto que vamos a probar
-    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
-}
-
-/**
- * Test de la funci&amp;oacute;n que realiza la suma
- * 
- * @dataProvider dataProviderAdd
- * 
- */
-public function testAdd($numberOne,$numberTwo,$result)
-{        
-    $this-&gt;assertEquals(
-        $result,            
-            $this-&gt;arithmeticBasicOperations-&gt;add(
-                $numberOne,
-                $numberTwo
-        )
-    );
-}
-/**
- * Set de datos de prueba para el método getReportList
- * 
- * @return array
- */
-public function dataProviderAdd()
-{
-    return array(
-            //primer set de datos para el test
-            array(1,2,3)
-    );
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>include_once dirname(&lt;strong>FILE&lt;/strong>) . &lsquo;/ArithmeticBasicOperations.php&rsquo;;
+</span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code> /**
+</span><span class='line'> * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
+</span><span class='line'> * 
+</span><span class='line'> * @var ArithmeticBasicOperations 
+</span><span class='line'> */
+</span><span class='line'>protected $arithmeticBasicOperations;
+</span><span class='line'> /**
+</span><span class='line'> * M&amp;eacute;todo que se ejecuta por cada test
+</span><span class='line'> * 
+</span><span class='line'> * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
+</span><span class='line'> * que se le va a realizar las pruebas asi como los set de datos a usar.
+</span><span class='line'> * 
+</span><span class='line'> * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
+</span><span class='line'> * @version 1.0
+</span><span class='line'> * 
+</span><span class='line'> * @return void;
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>protected function setUp()
+</span><span class='line'>{
+</span><span class='line'>    //Instanciamos el objeto que vamos a probar
+</span><span class='line'>    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>/**
+</span><span class='line'> * Test de la funci&amp;oacute;n que realiza la suma
+</span><span class='line'> * 
+</span><span class='line'> * @dataProvider dataProviderAdd
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>public function testAdd($numberOne,$numberTwo,$result)
+</span><span class='line'>{        
+</span><span class='line'>    $this-&gt;assertEquals(
+</span><span class='line'>        $result,            
+</span><span class='line'>            $this-&gt;arithmeticBasicOperations-&gt;add(
+</span><span class='line'>                $numberOne,
+</span><span class='line'>                $numberTwo
+</span><span class='line'>        )
+</span><span class='line'>    );
+</span><span class='line'>}
+</span><span class='line'>/**
+</span><span class='line'> * Set de datos de prueba para el método getReportList
+</span><span class='line'> * 
+</span><span class='line'> * @return array
+</span><span class='line'> */
+</span><span class='line'>public function dataProviderAdd()
+</span><span class='line'>{
+</span><span class='line'>    return array(
+</span><span class='line'>            //primer set de datos para el test
+</span><span class='line'>            array(1,2,3)
+</span><span class='line'>    );
+</span><span class='line'>}
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
 Analizemos el c&oacute;digo:
 <ul>
 <li>El comentario <i>@dataProvider</i> nos indica que el test va a usar una fuente de datos como entrada y que la funci&oacute;n que
@@ -332,10 +531,10 @@ retorna esa fuente se llama: dataProviderAdd, podemos usar cualquier nombre para
 <h2>Como ejecutar el test</h2>
 Usando la consola de comandos podemos ejecutar un script de prueba, debemos ir hasta la ruta donde
 tenemos el test y ejecutar en la consola ( windows ):
-{% codeblock Test phpUnit usando Php lang: PHP%}
-phpunit ArithmeticBasicOperationsTest.php
-{% endcodeblock %}
-{% img /images/ejecutando_test_phpUnit.png 671 471 &lsquo;ejecutando test phpUnit&rsquo; &lsquo;ejecutando test phpUnit&rsquo; %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>phpunit ArithmeticBasicOperationsTest.php</span></code></pre></td></tr></table></div></figure></notextile></div>
+<img src="/images/ejecutando_test_phpUnit.png" width="671" height="471" title="&lsquo;ejecutando test phpUnit&rsquo; &lsquo;ejecutando test phpUnit&rsquo;" >
 El test ha fallado, este el primer paso cuando estamos desarrollando orientado a las pruebas: <strong>nuestro primer test debe fallar</strong>, en nuestro caso ha fallado por que la clase <blockquote>ArithmeticBasicOperations.php</blockquote> no existe.
 </p>
 <h2>Generando la clase ArithmeticBasicOperations.php</h2>
@@ -343,54 +542,92 @@ El test ha fallado, este el primer paso cuando estamos desarrollando orientado a
 <blockquote>
 phpunit-skelgen &mdash;class ArithmeticBasicOperationsTest
 </blockquote>
-{% img /images/creando_clase_desde_el_test.png 669 103 &lsquo;creando clase desde el test&rsquo; &lsquo;creando clase desde el test&rsquo; %}
-{% codeblock Clase generada desde el test lang: PHP%}
-&lt;?php
-/<em>*
- * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
- </em>/
-class ArithmeticBasicOperations
-{</p>
-
-<pre><code>/**
- * @todo Implement add().
- */
-public function add()
-{
-    // Remove the following line when you implement this method.
-    throw new RuntimeException('Not yet implemented.');
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}
+<img src="/images/creando_clase_desde_el_test.png" width="669" height="103" title="&lsquo;creando clase desde el test&rsquo; &lsquo;creando clase desde el test&rsquo;" >
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Clase generada desde el test lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>/&lt;em>*
+</span><span class='line'> * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
+</span><span class='line'> &lt;/em>/
+</span><span class='line'>class ArithmeticBasicOperations
+</span><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>/**
+</span><span class='line'> * @todo Implement add().
+</span><span class='line'> */
+</span><span class='line'>public function add()
+</span><span class='line'>{
+</span><span class='line'>    // Remove the following line when you implement this method.
+</span><span class='line'>    throw new RuntimeException('Not yet implemented.');
+</span><span class='line'>}
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
 Modificamos la clase para agregar los par&aacute;metros y las l&iacute;neas de c&oacute;digo necesarias para hacer pasar el test.
-{% codeblock Clase generada desde el test lang: PHP%}
-&lt;?php
-/<em>*
- * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
- </em>/
-class ArithmeticBasicOperations
-{</p>
-
-<pre><code>/**
- * Funci&amp;oacute;n que suma dos n&amp;uacute;meros
- *
- * @param float $floNumberOne primer entero sumando
- * @param float $floNumberTwo segundo entero sumando
- *
- * @return float
- */
- public function add($floNumberOne,$floNumberTwo)
- {
-   return  $floNumberOne+$floNumberTwo;
- }
-</code></pre>
-
-<p>}
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Clase generada desde el test lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>/&lt;em>*
+</span><span class='line'> * Generated by PHPUnit_SkeletonGenerator 1.2.1 on 2013-07-19 at 10:57:42.
+</span><span class='line'> &lt;/em>/
+</span><span class='line'>class ArithmeticBasicOperations
+</span><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>/**
+</span><span class='line'> * Funci&amp;oacute;n que suma dos n&amp;uacute;meros
+</span><span class='line'> *
+</span><span class='line'> * @param float $floNumberOne primer entero sumando
+</span><span class='line'> * @param float $floNumberTwo segundo entero sumando
+</span><span class='line'> *
+</span><span class='line'> * @return float
+</span><span class='line'> */
+</span><span class='line'> public function add($floNumberOne,$floNumberTwo)
+</span><span class='line'> {
+</span><span class='line'>   return  $floNumberOne+$floNumberTwo;
+</span><span class='line'> }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
 Si ejecutamos nuestro test de nuevo
-{% img /images/test_php_terminado.png 666 216 &lsquo;El test ha pasado&rsquo; &lsquo;El test ha pasado&rsquo; %}
+<img src="/images/test_php_terminado.png" width="666" height="216" title="&lsquo;El test ha pasado&rsquo; &lsquo;El test ha pasado&rsquo;" >
 Ahora el test ha pasado, el assert que hemos definido ha sido exitoso!
 </p>
 <p>Para el pr&oacute;ximo post vamos a empezar a agregar otros casos de prueba para nuestro test de
@@ -456,45 +693,75 @@ aqui es donde viene el cambio de chip, lo primero que tenemos que hacer es:<br/>
 
 <p><p>
 Ya con una idea inicial de que funciones debe tener nuestro script, entonces creamos nuestra prueba la vamos a llamar: <blockquote>ArithmeticBasicOperationsTest</blockquote>
-{% codeblock Test phpUnit usando Php lang: PHP%}
-&lt;?php
-class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{</p>
-
-<p>}
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
 La clase de prueba extiende de una clase llamada PHPUnit_Framework_TestCase y es la que nos indica que estamos programando un test y nos permite usar todas las caracter&iacute;sticas de PhpUnit.
 </p>
 <p>
-{% codeblock Test phpUnit usando Php lang: PHP%}
-class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{</p>
-
-<pre><code> /**
- * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
- * 
- * @var ArithmeticBasicOperations 
- */
-protected $arithmeticBasicOperations;
- /**
- * M&amp;eacute;todo que se ejecuta por cada test
- * 
- * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
- * que se le va a realizar las pruebas asi como los set de datos a usar.
- * 
- * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
- * @version 1.0
- * 
- * @return void;
- * 
- */
-protected function setUp()
-{
-    //Instanciamos el objeto que vamos a probar
-    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
-}
-</code></pre>
-
-<p>}
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Test phpUnit usando Php lang: PHP</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ArithmeticBasicOperationsTest extends PHPUnit_Framework_TestCase{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code> /**
+</span><span class='line'> * Clase que contiene los m&amp;eacute;todos b&amp;aacute;sicos de operaci&amp;oacute;n
+</span><span class='line'> * 
+</span><span class='line'> * @var ArithmeticBasicOperations 
+</span><span class='line'> */
+</span><span class='line'>protected $arithmeticBasicOperations;
+</span><span class='line'> /**
+</span><span class='line'> * M&amp;eacute;todo que se ejecuta por cada test
+</span><span class='line'> * 
+</span><span class='line'> * Se ejecuta al iniciar cada test, se usa para inicializar el objeto a
+</span><span class='line'> * que se le va a realizar las pruebas asi como los set de datos a usar.
+</span><span class='line'> * 
+</span><span class='line'> * @author  Jos&amp;eacute; Joaqu&amp;iacute;n Berm&amp;uacute;dez Correa &lt;jose.bermudez.correa@gmail.com&gt;
+</span><span class='line'> * @version 1.0
+</span><span class='line'> * 
+</span><span class='line'> * @return void;
+</span><span class='line'> * 
+</span><span class='line'> */
+</span><span class='line'>protected function setUp()
+</span><span class='line'>{
+</span><span class='line'>    //Instanciamos el objeto que vamos a probar
+</span><span class='line'>    $this-&gt;arithmeticBasicOperations = new ArithmeticBasicOperations();
+</span><span class='line'>}
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div>
 Todo script de test debe sobreescribir el m&eacute;todo setUp que se encuentra en la clase <blockquote>PHPUnit_Framework_TestCase</blockquote>
 </p>
 <p>Para el pr&oacute;ximo post vamos a empezar a codificar nuestro test para probar la funcionalidad de sumar</p></p>
@@ -518,21 +785,21 @@ como instalar y para que sirve ese framework.</p>
 
 <p>Para instalar phpUnit debemos ejecutar la siguiente l&iacute;nea de comando:</p>
 
-<p>{% codeblock Instalar phpUnit usando PEAR &ndash; Windows %}
-pear install -a pear.phpunit.de/PHPUnit ( Windows )
-{% endcodeblock %}
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando PEAR &ndash; Windows </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pear install -a pear.phpunit.de/PHPUnit ( Windows )</span></code></pre></td></tr></table></div></figure></notextile></div>
 Se debe ver algo como esto:</p>
 
-<p>{% img /images/cmd-instalar-phpunit.png 350 350 &lsquo;CMD-windows&rsquo; &lsquo;CMD-windows&rsquo; %}</p>
+<p><img src="/images/cmd-instalar-phpunit.png" width="350" height="350" title="&lsquo;CMD-windows&rsquo; &lsquo;CMD-windows&rsquo;" ></p>
 
 <p>Una vez terminado el proceso ejecutamos el siguiente comando:
-{% codeblock Instalar phpUnit usando PEAR &ndash; Windows %}
-pear clear-cache
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando PEAR &ndash; Windows </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pear clear-cache</span></code></pre></td></tr></table></div></figure></notextile></div>
 Y por &uacute;ltimo verificamos la versi&oacute;n de nuestro phpUnit ejecutando el siguiente comando:
-{% codeblock Instalar phpUnit usando PEAR -Windows %}
-phpunit &mdash;version
-{% endcodeblock %}
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando PEAR -Windows </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>phpunit &mdash;version</span></code></pre></td></tr></table></div></figure></notextile></div>
 Listo hemos terminado, ahora solo nos basta empezar a escribir nuestras pruebas unitarias para que la vida
 como programadores se nos haga mas f&aacute;cil.</p>
 
