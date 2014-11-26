@@ -9,7 +9,7 @@ categories: [php, phpUnit, TDD, composer]
 <!-- more -->
 <h2>Instalar composer</h2>
 <p>Estas instrucciones son ejecutadas en un equipo con sistema operativo Ubuntu 14.04.1 LTS</p>
-<p>Composer es un manejador de dependencias para PHP y sirve para administrar librer&iacute;as de terceros o propias en nuestros proyectos de PHP.
+<p align="justify">Composer es un manejador de dependencias para PHP y sirve para administrar librer&iacute;as de terceros o propias en nuestros proyectos de PHP.
 Composer es capaz de de instalar las librer&iacute;as que requieres para tu proyecto y si esas librer&iacute;as dependen de otras tambi&eacute;n es capaz de resolver las dependencias y descargar todo lo que necesites.</p>
 <p><i><a href="http://pear.phpunit.de/" target="_blank">En diciembre de 2014 el canal de pear para phpunit será desconectado.</a></i>.</p>
 <p>Dentro de la carpeta del proyecto ejecutar el siguiente comando:</p>
@@ -57,7 +57,7 @@ sudo apt-get update
 <li><a href="http://piece-framework.com/projects/makegood/wiki" target="_blank">MakeGood</a>.</li>
 </ul>
 <h3>Ejecutar las pruebas >> Consola de comandos.</h3>
-<p> Permite ejecutar la prueba desde una consola de comandos, simplemente se debe llamar el ejecutable de phpunit que esta dentro de la carpeta de las librerias que el composer descarg&oacute;</p>
+<p align="justify"> Permite ejecutar la prueba desde una consola de comandos, simplemente se debe llamar el ejecutable de phpunit que esta dentro de la carpeta de las librerias que el composer descarg&oacute;</p>
 {% codeblock Instalar phpUnit usando Composer - Linux %}
 jbermudez@xxxxxxxxx:/yyy/yyy/yyyy/carpetaproyecto$ vendor/bin/phpunit  rutatest/PruebaTest.php
 
@@ -71,8 +71,8 @@ OK (6 tests, 9 assertions)
 
 <h3>Ejecutar las pruebas >> Como un programa de eclipse.</h3>
 
-Crear dentro de la carpeta del proyecto de eclipse el archivo: phpunitconsole.sh
-Agregar las siguientes líneas:
+<p>Crear dentro de la carpeta del proyecto de eclipse el archivo: phpunitconsole.sh</p>
+<p>Agregar las siguientes líneas:</p>
 {% codeblock Instalar phpUnit usando Composer - Linux %}
 #!/bin/bash
 FNAME=$(echo $1 | cut -c 2-)
@@ -94,8 +94,6 @@ Window → Preferences → PHP → PHP libraries  , Agregar una nueva librería,
 <p>Php include Path  →  Libraries →  Add library → User library → Elegir la libraria composer</p>
 
 <img src="/images/makegoodpaso1.jpg"  alt="Make agregar la librer&iacute;a"/>
-
-
 
 Hasta pronto !!!
 
