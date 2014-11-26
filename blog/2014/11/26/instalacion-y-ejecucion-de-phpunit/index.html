@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Instalaci&oacute;n y ejecuci&oacute;n de phpunit - El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</title>
+  <meta name="author" content="Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content=" Esta vez vamos a ver como instalar y ejecutar phpunit usando el administrador de dependencias composer. ">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://josebermudez.github.io/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa" />
+  <meta name="og:title" content="Instalaci&oacute;n y ejecuci&oacute;n de phpunit" />
+  <meta name="og:description" content=" Esta vez vamos a ver como instalar y ejecutar phpunit usando el administrador de dependencias composer. " />
+  <meta name="og:url" content="http://josebermudez.github.io/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit/"/>
+  <meta name="url" content="http://josebermudez.github.io/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit/">
+  
+  <meta name="subject" content="TDDcomposerphpphpUnit"/>
+  <meta name="category" content="TDDcomposerphpphpUnit"/>
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43471108-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</a>
+    <ul class="nav">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/blog/archives">Archivos</a></li>
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:josebermudez.github.io" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <div class="row">
+        <article class="span8 offset2" role="article">
+          <div class="article-format">
+
+  <header>
+    
+      
+        <h1 class="entry-title">Instalaci&oacute;n Y Ejecuci&oacute;n De Phpunit</h1>
+      
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-26T08:49:00-05:00" pubdate data-updated="true">Nov 26<span>th</span>, 2014</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/composer/'>composer</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/phpunit/'>phpUnit</a>
+  
+</span>
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Esta vez vamos a ver como instalar y ejecutar phpunit usando el administrador de dependencias <a href="https://getcomposer.org/" target="_blank">composer</a>.</p>
+
+
+<!-- more -->
+
+
+<h2>Instalar composer</h2>
+
+
+<p>Estas instrucciones son ejecutadas en un equipo con sistema operativo Ubuntu 14.04.1 LTS</p>
+
+
+<p>Composer es un manejador de dependencias para PHP y sirve para administrar librer&iacute;as de terceros o propias en nuestros proyectos de PHP.
+Composer es capaz de de instalar las librer&iacute;as que requieres para tu proyecto y si esas librer&iacute;as dependen de otras tambi&eacute;n es capaz de resolver las dependencias y descargar todo lo que necesites.</p>
+
+
+<p><i><a href="http://pear.phpunit.de/" target="_blank">En diciembre de 2014 el canal de pear para phpunit será desconectado.</a></i>.</p>
+
+
+<p>Dentro de la carpeta del proyecto ejecutar el siguiente comando:</p>
+
+
+
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -r "readfile('https://getcomposer.org/installer');" | php</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>Una vez ejecutado, dentro de la carpeta del proyecto debe estar el archivo: composer.phar</p>
+
+
+<p>Dentro de la carpeta padminfo2 crear el archivo: composer.json y agregar las siguientes líneas:</p>
+
+
+
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - json </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{
+</span><span class='line'>    "require-dev": {
+</span><span class='line'>    "phpunit/phpunit": "3.7.*",
+</span><span class='line'>    "phpunit/dbunit": ">=1.2"    
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>Dentro de la carpeta padminfo2 ejecutar:</p>
+
+
+
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php composer.phar update</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>Este comando creará la carpeta vendor y dentro de esta iniciará la descarga de las librerías necesarias para el uso de  phpunit.</p>
+
+
+<p>Verificar que phpunit esta correctamente instalado, ejecutar dentro de la carpeta padminfo2</p>
+
+
+
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php vendor/bin/phpunit --version</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>Instalar SqLite in memory</h2>
+
+
+<ul>
+<li>No se necesita nada instalado o configurado. </li>
+<li>Sólo se necesita la base de datos durante la ejecución de las pruebas.</li>
+<li>Es más rápido y no requiere ningún permiso de directorio / archivo para trabajar.</li>
+<li>Se puede usar cualquier motor de base de datos.</li>
+</ul>
+
+
+
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install sqlite php5-sqlite</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>si hay algún error ejecutar antes:</p>
+
+
+
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h2>Ejecutar las pruebas</h2>
+
+
+<p>Las pruebas unitarias se pueden ejecutar de varias formas, entre ellas vamos a mencionar:</p>
+
+
+<ul>
+<li>Consola de comandos.</li>
+<li>Como un programa de <a href="https://eclipse.org/pdt/" target="_blank">eclipse</a>.</li>
+<li><a href="http://piece-framework.com/projects/makegood/wiki" target="_blank">MakeGood</a>.</li>
+</ul>
+
+
+<h3>Ejecutar las pruebas >> Consola de comandos.</h3>
+
+
+<p> Permite ejecutar la prueba desde una consola de comandos, simplemente se debe llamar el ejecutable de phpunit que esta dentro de la carpeta de las librerias que el composer descarg&oacute;</p>
+
+
+
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jbermudez@xxxxxxxxx:/yyy/yyy/yyyy/carpetaproyecto$ vendor/bin/phpunit  rutatest/PruebaTest.php
+</span><span class='line'>
+</span><span class='line'>PHPUnit 3.7.38 by Sebastian Bergmann.
+</span><span class='line'>Configuration read from /yyy/yyy/yyyy/carpetaproyecto/tests/phpunit.xml
+</span><span class='line'>......
+</span><span class='line'>Time: 2.1 seconds, Memory: 4.75Mb
+</span><span class='line'>
+</span><span class='line'>OK (6 tests, 9 assertions)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3>Ejecutar las pruebas >> Como un programa de eclipse.</h3>
+
+
+<p>Crear dentro de la carpeta del proyecto de eclipse el archivo: phpunitconsole.sh
+Agregar las siguientes líneas:</p>
+
+<figure class='code'><figcaption><span>Instalar phpUnit usando Composer - Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>FNAME=$(echo $1 | cut -c 2-)
+</span><span class='line'>cd rutaproyecto;
+</span><span class='line'>carpetaproyecto/vendor/bin/phpunit  $FNAME;
+</span><span class='line'>Dar permisos de ejecución al archivo sh:
+</span><span class='line'>chmod 777 phpunitconsole.sh</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>Click en el icono de configuración de herramientas >> Crear un nuevo programa  >> En la pestaña common activar la opción External Tools </p>
+
+
+<p><img src="/images/paso1.jpg" alt="Ejecuión desde línea de comandos"/>
+<img src="/images/paso4.jpg"  alt="Make agregar la librer&iacute;a"/></p>
+
+<h3>Ejecutar las pruebas >> Make Good.</h3>
+
+
+
+
+<p>En eclipse:</p>
+
+
+<p>
+Window → Preferences → PHP → PHP libraries  , Agregar una nueva librería, llamarla composer.</p>
+
+
+<p>En la misma ventana presionar en Add External Folder y buscar la carpeta donde esta el Vendor del composer</p>
+
+
+<p>En las propiedades del proyecto:</p>
+
+
+<p>Php include Path  →  Libraries →  Add library → User library → Elegir la libraria composer</p>
+
+
+<p><img src="/images/makegoodpaso1.jpg"  alt="Make agregar la librer&iacute;a"/></p>
+
+<p>Hasta pronto !!!</p>
+</div>
+
+
+
+
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</span></span>
+  
+
+ - 
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-26T08:49:00-05:00" pubdate data-updated="true">Nov 26<span>th</span>, 2014</time> - 
+      
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/composer/'>composer</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/phpunit/'>phpUnit</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://josebermudez.github.io/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit/" data-via="josejbermdez" data-counturl="http://josebermudez.github.io/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    
+      <a class="pull-left" href="/blog/2014/10/07/entornos-de-desarrollo-virtuales-con-vagrant/" title="Previous Post: Entornos de desarrollo virtuales con vagrant">&laquo; Entornos de desarrollo virtuales con vagrant</a>
+    
+    
+  </footer>
+
+</div>
+
+          
+            <div class="article-format">
+              <h1>Comments</h1>
+              <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            </div>
+          
+        </article>
+      </div>
+    </div>
+  </div>
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>&Uacute;ltimas entradas</h2>
+    <ul class="recent_posts">
+      
+        <li>
+          <a href="/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit/">Instalaci&oacute;n y ejecuci&oacute;n de phpunit</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2014/10/07/entornos-de-desarrollo-virtuales-con-vagrant/">Entornos de desarrollo virtuales con vagrant</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2013/09/13/phpunit-plus-tdd-un-ejemplo-practico-v/">PhpUnit + TDD un ejemplo pr&aacute;ctico V</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2013/08/02/phpunit-plus-tdd-un-ejemplo-practico-iv/">PhpUnit + TDD un ejemplo pr&aacute;ctico IV</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2013/07/26/phpunit-plus-tdd-un-ejemplo-practico-iii/">PhpUnit + TDD un ejemplo pr&aacute;ctico III</a>
+        </li>
+      
+    </ul>
+    <h2><a href="/blog/archives">Anteriores entradas</a></h2>
+  </div>
+  <div class="span3">
+    
+
+  </div>
+  <div class="span4">
+    
+<h2>twitter</h2>
+<a href="https://twitter.com/josejbermdez" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @josejbermdez</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="tweet" data-twitter-user="josejbermdez">
+</div>
+
+
+  </div>
+  <div class="span2">
+    <h2>Social:</h2>
+
+<a href="https://github.com/josebermudez/" rel="tooltip" title="Github"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+<a href="http://twitter.com/josejbermdez" rel="tooltip" title="Twitter"><img class="social_icon" title="Twitter" alt="Twitter icon" src="/images/glyphicons_391_twitter_t.png"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  <a href="/">El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa</a>
+  - Copyright &copy; 2014 - Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa
+</p>
+<p class="pull-right">
+  <span>Impulsado por <a href="http://octopress.org/">Octopress</a>.</span>
+</p>
+
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'josejoaquinbermudezcorrea';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://josebermudez.github.io%2Fblog%2F2014%2F11%2F26%2Finstalacion-y-ejecucion-de-phpunit%2F';
+        var disqus_url = 'http://josebermudez.github.io%2Fblog%2F2014%2F11%2F26%2Finstalacion-y-ejecucion-de-phpunit%2F';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

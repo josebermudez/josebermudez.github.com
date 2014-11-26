@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: composer | El blog de Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></title>
+  <link href="http://josebermudez.github.io/blog/categories/composer/atom.xml" rel="self"/>
+  <link href="http://josebermudez.github.io/"/>
+  <updated>2014-11-26T09:49:38-05:00</updated>
+  <id>http://josebermudez.github.io/</id>
+  <author>
+    <name><![CDATA[Jos&eacute; Joaqu&iacute;n Berm&uacute;dez Correa]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Instalaci&oacute;n y ejecuci&oacute;n de phpunit]]></title>
+    <link href="http://josebermudez.github.io/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit/"/>
+    <updated>2014-11-26T08:49:00-05:00</updated>
+    <id>http://josebermudez.github.io/blog/2014/11/26/instalacion-y-ejecucion-de-phpunit</id>
+    <content type="html"><![CDATA[<p>Esta vez vamos a ver como instalar y ejecutar phpunit usando el administrador de dependencias <a href="https://getcomposer.org/" target="_blank">composer</a>.</p>
+
+
+<!-- more -->
+
+
+<h2>Instalar composer</h2>
+
+
+<p>Estas instrucciones son ejecutadas en un equipo con sistema operativo Ubuntu 14.04.1 LTS</p>
+
+
+<p>Composer es un manejador de dependencias para PHP y sirve para administrar librer&iacute;as de terceros o propias en nuestros proyectos de PHP.
+Composer es capaz de de instalar las librer&iacute;as que requieres para tu proyecto y si esas librer&iacute;as dependen de otras tambi&eacute;n es capaz de resolver las dependencias y descargar todo lo que necesites.</p>
+
+
+<p><i><a href="http://pear.phpunit.de/" target="_blank">En diciembre de 2014 el canal de pear para phpunit será desconectado.</a></i>.</p>
+
+
+<p>Dentro de la carpeta del proyecto ejecutar el siguiente comando:</p>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -r &ldquo;readfile(&lsquo;&lt;a href="https://getcomposer.org/installer">https://getcomposer.org/installer&lt;/a>&rsquo;);&rdquo; | php</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Una vez ejecutado, dentro de la carpeta del proyecto debe estar el archivo: composer.phar</p>
+
+
+<p>Dentro de la carpeta padminfo2 crear el archivo: composer.json y agregar las siguientes líneas:</p>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; json </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>"require-dev": {
+</span><span class='line'>"phpunit/phpunit": "3.7.*",
+</span><span class='line'>"phpunit/dbunit": "&gt;=1.2"    
+</span><span class='line'>}
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Dentro de la carpeta padminfo2 ejecutar:</p>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php composer.phar update</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Este comando creará la carpeta vendor y dentro de esta iniciará la descarga de las librerías necesarias para el uso de  phpunit.</p>
+
+
+<p>Verificar que phpunit esta correctamente instalado, ejecutar dentro de la carpeta padminfo2</p>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php vendor/bin/phpunit &mdash;version</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Instalar SqLite in memory</h2>
+
+
+<ul>
+<li>No se necesita nada instalado o configurado. </li>
+<li>Sólo se necesita la base de datos durante la ejecución de las pruebas.</li>
+<li>Es más rápido y no requiere ningún permiso de directorio / archivo para trabajar.</li>
+<li>Se puede usar cualquier motor de base de datos.</li>
+</ul>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install sqlite php5-sqlite</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>si hay algún error ejecutar antes:</p>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Ejecutar las pruebas</h2>
+
+
+<p>Las pruebas unitarias se pueden ejecutar de varias formas, entre ellas vamos a mencionar:</p>
+
+
+<ul>
+<li>Consola de comandos.</li>
+<li>Como un programa de <a href="https://eclipse.org/pdt/" target="_blank">eclipse</a>.</li>
+<li><a href="http://piece-framework.com/projects/makegood/wiki" target="_blank">MakeGood</a>.</li>
+</ul>
+
+
+<h3>Ejecutar las pruebas >> Consola de comandos.</h3>
+
+
+<p> Permite ejecutar la prueba desde una consola de comandos, simplemente se debe llamar el ejecutable de phpunit que esta dentro de la carpeta de las librerias que el composer descarg&oacute;</p>
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jbermudez@xxxxxxxxx:/yyy/yyy/yyyy/carpetaproyecto$ vendor/bin/phpunit  rutatest/PruebaTest.php&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>PHPUnit 3.7.38 by Sebastian Bergmann.
+</span><span class='line'>Configuration read from /yyy/yyy/yyyy/carpetaproyecto/tests/phpunit.xml
+</span><span class='line'>&hellip;&hellip;
+</span><span class='line'>Time: 2.1 seconds, Memory: 4.75Mb&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>OK (6 tests, 9 assertions)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Ejecutar las pruebas >> Como un programa de eclipse.</h3>
+
+
+<p>Crear dentro de la carpeta del proyecto de eclipse el archivo: phpunitconsole.sh
+Agregar las siguientes líneas:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Instalar phpUnit usando Composer &ndash; Linux </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>!/bin/bash&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>FNAME=$(echo $1 | cut -c 2-)
+</span><span class='line'>cd rutaproyecto;
+</span><span class='line'>carpetaproyecto/vendor/bin/phpunit  $FNAME;
+</span><span class='line'>Dar permisos de ejecución al archivo sh:
+</span><span class='line'>chmod 777 phpunitconsole.sh</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Click en el icono de configuración de herramientas >> Crear un nuevo programa  >> En la pestaña common activar la opción External Tools </p>
+
+
+<p><img src="http://josebermudez.github.io/images/paso1.jpg" alt="Ejecuión desde línea de comandos"/>
+<img src="http://josebermudez.github.io/images/paso4.jpg"  alt="Make agregar la librer&iacute;a"/></p>
+
+<h3>Ejecutar las pruebas >> Make Good.</h3>
+
+
+
+
+<p>En eclipse:</p>
+
+
+<p>
+Window → Preferences → PHP → PHP libraries  , Agregar una nueva librería, llamarla composer.</p>
+
+
+<p>En la misma ventana presionar en Add External Folder y buscar la carpeta donde esta el Vendor del composer</p>
+
+
+<p>En las propiedades del proyecto:</p>
+
+
+<p>Php include Path  →  Libraries →  Add library → User library → Elegir la libraria composer</p>
+
+
+<p><img src="http://josebermudez.github.io/images/makegoodpaso1.jpg"  alt="Make agregar la librer&iacute;a"/></p>
+
+<p>Hasta pronto !!!</p>
+]]></content>
+  </entry>
+  
+</feed>
